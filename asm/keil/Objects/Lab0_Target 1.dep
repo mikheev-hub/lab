@@ -1,0 +1,6 @@
+Dependencies for Project 'Lab0', Target 'Target 1': (DO NOT MODIFY !)
+F (..\src\config.s)(0x5D99A4B5)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 524" --pd "STM32F10X_MD_VL SETA 1"--list .\listings\config.lst --xref -o .\objects\config.o --depend .\objects\config.d)
+F (..\src\stm32f10x.s)(0x5D875DAE)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 524" --pd "STM32F10X_MD_VL SETA 1"--list .\listings\stm32f10x.lst --xref -o .\objects\stm32f10x.o --depend .\objects\stm32f10x.d)
+F (..\src\led.s)(0x5D99A461)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 524" --pd "STM32F10X_MD_VL SETA 1"--list .\listings\led.lst --xref -o .\objects\led.o --depend .\objects\led.d)
+I (..\src\config.s)(0x5D99A4B5)
+I (..\src\stm32f10x.s)(0x5D875DAE)
