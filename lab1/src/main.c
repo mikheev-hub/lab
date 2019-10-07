@@ -1,6 +1,11 @@
 #include "stm32f10x.h"
 #include "main.h"
 
+int BTN_pressed = 0;
+int BTN_press = 0;
+int BTN_release = 0;
+int Bouncevalue = 500; 
+
 void delay(uint32_t coun)
 {
 		for(uint32_t i = 0; i < 2400 * coun; i++);
@@ -33,8 +38,29 @@ int main(){
 	{
 		if((GPIOA->IDR & 0x00000001))
 		{
-			counter += 1;
+			BTN_press++;
+			BTN_release = 0;
+			
+				if (BTN_pressed == 0)
+				{
+				counter += 1;
+				BTN_pressed = 1;
+				}
+			BTN_press = 0;
 		}
+		
+		else
+		{
+			BTN_release++;
+			BTN_press = 0;
+			
+			if (BTN_release > Bouncevalue)
+			{
+				BTN_pressed = 0;
+				BTN_release = 0;
+			}
+		}
+		
 		
 		GPIOC->BSRR |= GPIO_BSRR_BS5;
 		delay(counter);
