@@ -87,11 +87,10 @@ int main()
 		{	
 			flag_return = true;
 			button = 0;
-			
 		}
 		
 		if(flag_return == true)
-			GPIOC->BSRR = GPIO_BSRR_BS6 >> (button);
+			GPIOC->BSRR = GPIO_BSRR_BS7 >> (button);
 		
 	}
 }
