@@ -30,15 +30,35 @@ int main()
 
 	gpiocBegin();
 	gpioaBegin();
+	bool tab = true;
+	uint32_t volatile button = 0;
 	
-	uint32_t volatile pause = 100;
+	uint32_t volatile pause = 75;
 	
 	while(1)
 	{
-		
+	if((GPIOA->IDR & 0x00000001))
+	{
+		delay(1);
+		if(tab)
+		{
+			pause = pause - 15;
+		}
+		tab = false;
+	}
+	else
+	{
+			tab = true;
+	}
+	if (pause > 0)
+	{	
+
 		GPIOC->BSRR = GPIO_BSRR_BR0;
-		delay(3*pause);
+		delay(pause);
 		GPIOC->BSRR = GPIO_BSRR_BS0;
-		delay(pause);	
+		delay(pause/2);
+	}
 	}
 }
+
+
