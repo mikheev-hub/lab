@@ -30,7 +30,9 @@ int main()
 
 	gpiocBegin();
 	gpioaBegin();
+	
 	bool tab = true;
+	
 	uint32_t volatile button = 0;
 	
 	uint32_t volatile pause = 75;
@@ -42,22 +44,23 @@ int main()
 		delay(1);
 		if(tab)
 		{
-			pause = pause - 15;
+			pause%=15;
 		}
 		tab = false;
 	}
 	else
 	{
-			tab = true;
+		tab = true;
 	}
 	if (pause > 0)
 	{	
-
 		GPIOC->BSRR = GPIO_BSRR_BR0;
 		delay(pause);
 		GPIOC->BSRR = GPIO_BSRR_BS0;
 		delay(pause/2);
 	}
+	else
+		pause = 75;
 	}
 }
 
