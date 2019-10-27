@@ -39,12 +39,12 @@ int main()
 	
 	while(1)
 	{
-	if((GPIOA->IDR & 0x00000001))
+	if(GPIOA->IDR & GPIO_IDR_IDR0)
 	{
 		delay(1);
 		if(tab)
 		{
-			pause%=15;
+			pause=pause-15;
 		}
 		tab = false;
 	}
