@@ -51,8 +51,8 @@ loop
 	AND 	R1, R2 						; R1 = R1 & R2			
 	CMP	    R1, #0x00000001				; R1 == 0x00000001
 	IT		EQ
-	BEQ		flag 
-	ADDEQ	R3, #0x00000001				; R3 = R3 + 1
+	BLEQ	flag 
+	ADDEQ	R5, #0x00000000				; flag = false
 	
 	MOV32	R0, GPIOC_BSRR
 	MOV	 	R1, #(PIN8)
@@ -64,16 +64,18 @@ loop
 	
 	B		loop
 	
-flag
-	CMP		R5, #0x00000001
-	ITE		EQ
-	ADDEQ	R3, #0x00000001
-	ADDNE	R5, #0x00000001
-	B		loop
-	
-	
-	
 	ENDP
+		
+flag		PROC
+	CMP		R5, #0x00000001				; if(flag) 
+	ITE		EQ
+	ADDEQ	R3, #0x00000001				; R3 = R3 + 1
+	ADDNE	R5, #0x00000001				; if(!flag)=>flag = true
+	BX		LR
+	ENDP
+	
+	
+	
 	
 delay		PROC						
 	MOV		R2, #0x00000532
