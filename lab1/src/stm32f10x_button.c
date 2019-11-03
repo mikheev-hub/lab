@@ -61,36 +61,22 @@ int main()
 	gpioaBegin();
 
 	bool tab = true;
-	uint32_t volatile button = 0;
-	bool flag_return = false;
+	uint32_t volatile button=0;
 	
 	while(1)
 	{
-		if((GPIOA->IDR & 0x00000001))
+		if (!button)
+			  GPIOC->ODR = 0;
+				GPIOC->ODR = GPIO_ODR_ODR0 << button;		
+		if(GPIOA->IDR & GPIO_IDR_IDR0)
 		{
 			delay(1);
 			if(tab)
-				button++;
+				button += 1;
+			  button %= 8;
 			tab = false;
 		}
 		else
-		{
 			tab = true;
-		}
-		
-		if(flag_return == false)
-		{
-			GPIOC->BSRR = GPIO_BSRR_BR0 << (button - 1);
-		}
-		
-		if(button == 8)
-		{	
-			flag_return = true;
-			button = 0;
-		}
-		
-		if(flag_return == true)
-			GPIOC->BSRR = GPIO_BSRR_BS7 >> (button);
-		
 	}
 }

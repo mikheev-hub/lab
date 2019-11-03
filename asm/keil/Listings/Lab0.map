@@ -1,4 +1,4 @@
-Component: ARM Compiler 5.06 update 5 (build 528) Tool: armlink [4d35e2]
+Component: ARM Compiler 5.06 update 4 (build 422) Tool: armlink [4d35d2]
 
 ==============================================================================
 
@@ -15,17 +15,18 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     ..\src\config.s                          0x00000000   Number         0  config.o ABSOLUTE
-    ..\src\led.s                             0x00000000   Number         0  led.o ABSOLUTE
+    ..\src\sound.s                           0x00000000   Number         0  sound.o ABSOLUTE
     ..\src\stm32f10x.s                       0x00000000   Number         0  stm32f10x.o ABSOLUTE
-    RESET                                    0x08000000   Section      172  led.o(RESET)
-    delay                                    0x0800009d   Thumb Code    16  led.o(RESET)
+    RESET                                    0x08000000   Section      204  sound.o(RESET)
+    flag                                     0x080000a5   Thumb Code    18  sound.o(RESET)
+    delay                                    0x080000b7   Thumb Code    22  sound.o(RESET)
 
     Global Symbols
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     BuildAttributes$$THM_ISAv4$P$D$K$B$S$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$EBA8$STANDARDLIB$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
-    Reset_Handler                            0x08000009   Thumb Code   148  led.o(RESET)
+    Reset_Handler                            0x08000009   Thumb Code   156  sound.o(RESET)
 
 
 
@@ -35,21 +36,21 @@ Memory Map of the image
 
   Image Entry point : 0x08000009
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x000000ac, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x000000cc, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000000ac, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x08000000, Size: 0x000000cc, Max: 0xffffffff, ABSOLUTE)
 
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x08000000   0x000000ac   Code   RO            1  * RESET               led.o
+    0x08000000   0x000000cc   Code   RO            1  * RESET               sound.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x080000ac, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Base: 0x20000000, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x080000ac, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Base: 0x20000000, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
@@ -61,10 +62,10 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       172          8          0          0          0        420   led.o
+       204          8          0          0          0        468   sound.o
 
     ----------------------------------------------------------------------
-       172          8          0          0          0        420   Object Totals
+       204          8          0          0          0        468   Object Totals
          0          0          0          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -79,15 +80,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-       172          8          0          0          0        420   Grand Totals
-       172          8          0          0          0        420   ELF Image Totals
-       172          8          0          0          0          0   ROM Totals
+       204          8          0          0          0        468   Grand Totals
+       204          8          0          0          0        468   ELF Image Totals
+       204          8          0          0          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                  172 (   0.17kB)
+    Total RO  Size (Code + RO Data)                  204 (   0.20kB)
     Total RW  Size (RW Data + ZI Data)                 0 (   0.00kB)
-    Total ROM Size (Code + RO Data + RW Data)        172 (   0.17kB)
+    Total ROM Size (Code + RO Data + RW Data)        204 (   0.20kB)
 
 ==============================================================================
 

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Lab0.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Lab0.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sun Oct 06 11:24:37 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Sat Nov 02 12:03:20 2019
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -12,20 +12,25 @@ Call chain for Maximum Stack Depth:</H3>
 <H3>
 Function Pointers
 </H3><UL>
- <LI><a href="#[1]">Reset_Handler</a> from led.o(RESET) referenced from led.o(RESET)
+ <LI><a href="#[1]">Reset_Handler</a> from sound.o(RESET) referenced from sound.o(RESET)
 </UL>
 <P>
 <H3>
 Global Symbols
 </H3>
-<P><STRONG><a name="[1]"></a>Reset_Handler</STRONG> (Thumb, 148 bytes, Stack size 0 bytes, led.o(RESET))
-<BR><BR>[Calls]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<P><STRONG><a name="[1]"></a>Reset_Handler</STRONG> (Thumb, 156 bytes, Stack size 0 bytes, sound.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flag
 </UL>
 <P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[2]"></a>delay</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, led.o(RESET))
+<P><STRONG><a name="[2]"></a>flag</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, sound.o(RESET))
+<BR><BR>[Called By]<UL><LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[3]"></a>delay</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, sound.o(RESET))
 <BR><BR>[Called By]<UL><LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
 </UL>
 <P>
