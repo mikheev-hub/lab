@@ -45,39 +45,41 @@ main
 	
 	
 	MOV      R2, #0x4                   ; Степень полинома
-	MOV      R2, #0x2                   ; Значение х
-	MOV      R3, #0x0                   ; sum = 0
-	MOV      R4, #0x0                   ; i = 0
-	MOV      R5, #0x1                   ; result = 1
+	MOV      R3, #0x2                   ; Значение х
+	MOV      R4, #0x0                   ; sum = 0
+	MOV      R5, #0x0                   ; i = 0 для pow
+	MOV      R7, #0x0                   ; i = 0 для for
+	MOV      R6, #0x1                   ; result = 1
+	MOV      R8, #0x0                   ; len
 	MOV32    R1, #0x20000200
 	
 for
-    CMP      R4, R2
+    CMP      R7, R2
 	ITT      LS
-	LDRSBLS  R6, [R1]                    ; int a = k[i]
-	SUBLS    R2, R4                      ; len - i
+	LDRSBLS  R11, [R1]                  ; int a = k[i]
+	SUBLS    R8, R2, R5                 ; len - i
 
 	BL       pow
-	CMP      R4, R2
+	CMP      R7, R2
 	IT       LS
-	MULLS    R7, R6, R5                  ; a * pow
+	MULLS    R10, R6, R11                ; a * pow
     CMP      R4, R2
 	ITTTT    LS
-	ADDLS    R5, R5, R7                  ; sum += x
-    ADDLS    R4, #0x1
-    ADDLS    R1, #0x1
+	ADDLS    R4, R4, R10                ; sum += x
+    ADDLS    R7, #0x1                   ; i++
+    ADDLS    R1, #0x1                   ; k[i] + 1
     BLS      for    
 	
 	ENDP
 	
 
 pow         PROC
-	CMP     R4, R2                    
+	CMP     R5, R8                    
     ITTT    LT
-    MULLT   R5, R5, R2                 ; rez = rez * x	
-	ADDLT   R4, #0x1                   ; i++
+    MULLT   R6, R6, R3                 ; rez = rez * x	
+	ADDLT   R5, #0x1                   ; i++
 	BLT     pow
-	MOV     R4, #0x0
+	MOV     R5, #0x0
 	BX      LR
 	ENDP
 		
