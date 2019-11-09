@@ -57,17 +57,17 @@ for
     CMP      R7, R2
 	ITT      LS
 	LDRSBLS  R11, [R1]                  ; int a = k[i]
-	SUBLS    R8, R2, R5                 ; len - i
+	SUBLS    R8, R2, R7                 ; len - i
 
 	BL       pow
 	CMP      R7, R2
 	IT       LS
 	MULLS    R10, R6, R11                ; a * pow
-    CMP      R4, R2
+    CMP      R7, R2
 	ITTTT    LS
 	ADDLS    R4, R4, R10                ; sum += x
     ADDLS    R7, #0x1                   ; i++
-    ADDLS    R1, #0x1                   ; k[i] + 1
+    ADDLS    R1, #0x1                   ; k[i] 
     BLS      for    
 	
 	ENDP
