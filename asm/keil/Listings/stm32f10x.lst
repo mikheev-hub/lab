@@ -21437,9 +21437,8 @@ ARM Macro Assembler    Page 330
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\objects\stm32f10x.d -o.\objects\stm32f10x.o -I.\RTE\_Target_1 -I
 C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include -IC:\Keil_v5\ARM\CM
-SIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 523
-" --predefine="STM32F10X_MD_VL SETA 1" --list=.\listings\stm32f10x.lst ..\src\s
-tm32f10x.s
+SIS\Include --predefine="__UVISION_VERSION SETA 523" --predefine="STM32F10X_MD_
+VL SETA 1" --list=.\listings\stm32f10x.lst ..\src\stm32f10x.s
 
 
 
@@ -67812,4 +67811,4 @@ Symbol: __Vendor_SysTickConfig
       None
 Comment: __Vendor_SysTickConfig unused
 5247 symbols
-5634 symbols in table
+5633 symbols in table

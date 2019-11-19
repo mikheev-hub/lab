@@ -54,14 +54,7 @@ loop									; Бесконечный цикл
 	
 	MOV32   R0, GPIOA_BSRR
 	MOV		R1, #(PIN0 << 16)
-				 (PIN1)
-				 (PIN2)
-				 (PIN3)
-				 (PIN4 << 16)
-				 (PIN5)
-				 
-				 (PIN0)
-				 ()
+
 	STR		R1, [R0]
 	
 	BL		delay						; задержка

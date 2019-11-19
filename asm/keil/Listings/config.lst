@@ -14,13 +14,23 @@ ARM Macro Assembler    Page 1
                        DELAY_VAL
                                EQU              0x01000000  ; Величина 
                                                             задержки
-    5 00000000         
-    6 00000000                 END
+    5 00000000 20000200 
+                       START_ADDRESS
+                               EQU              0x20000200
+    6 00000000 20000200 
+                       START_ADDRESS1
+                               EQU              0x20000200
+    7 00000000 20000300 
+                       START_ADDRESS2
+                               EQU              0x20000300
+    8 00000000         
+    9 00000000         
+   10 00000000                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\objects\config.d -o.\objects\config.o -I.\RTE\_Target_1 -IC:\Kei
 l_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\In
-clude --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 523" --pr
-edefine="STM32F10X_MD_VL SETA 1" --list=.\listings\config.lst ..\src\config.s
+clude --predefine="__UVISION_VERSION SETA 523" --predefine="STM32F10X_MD_VL SET
+A 1" --list=.\listings\config.lst ..\src\config.s
 
 
 
@@ -43,5 +53,29 @@ Symbol: STACK_TOP
    Uses
       None
 Comment: STACK_TOP unused
-2 symbols
-335 symbols in table
+START_ADDRESS 20000200
+
+Symbol: START_ADDRESS
+   Definitions
+      At line 5 in file ..\src\config.s
+   Uses
+      None
+Comment: START_ADDRESS unused
+START_ADDRESS1 20000200
+
+Symbol: START_ADDRESS1
+   Definitions
+      At line 6 in file ..\src\config.s
+   Uses
+      None
+Comment: START_ADDRESS1 unused
+START_ADDRESS2 20000300
+
+Symbol: START_ADDRESS2
+   Definitions
+      At line 7 in file ..\src\config.s
+   Uses
+      None
+Comment: START_ADDRESS2 unused
+5 symbols
+337 symbols in table

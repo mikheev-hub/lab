@@ -64,7 +64,6 @@ loop
     CMP     R1, #0x00000001
 	IT		NE                          ; if(!button) 
     MOVNE	R5, #0x00000001             ; flag = true
-	;MOV		R1, #0x00000000
 	
     MOV32   R0, GPIOC_BSRR
     MOV     R1, #(PIN8)

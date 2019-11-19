@@ -390,9 +390,9 @@
               <FilePath>..\src\stm32f10x.s</FilePath>
             </File>
             <File>
-              <FileName>sound.s</FileName>
+              <FileName>strcmp.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\src\sound.s</FilePath>
+              <FilePath>..\src\strcmp.s</FilePath>
             </File>
           </Files>
         </Group>

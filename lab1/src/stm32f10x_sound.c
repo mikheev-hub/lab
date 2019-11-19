@@ -61,6 +61,41 @@ int main()
 		else
 		{
 			tab = true;
-		}		
+		}
+    switch(button)
+    {
+		    case 1:
+				GPIOC->BSRR = GPIO_BSRR_BR8;
+				delay(pause);
+				GPIOC->BSRR = GPIO_BSRR_BS8;
+				delay(pause);
+				break;
+				
+				case 2:
+				GPIOC->BSRR = GPIO_BSRR_BR8;
+				delay(pause/2);
+				GPIOC->BSRR = GPIO_BSRR_BS8;
+				delay(pause/2);
+				break;
+				
+				case 3:
+				GPIOC->BSRR = GPIO_BSRR_BR8;
+				delay(pause/3);
+				GPIOC->BSRR = GPIO_BSRR_BS8;
+				delay(pause/3);
+				break;
+				
+				case 4:
+				GPIOC->BSRR = GPIO_BSRR_BR8;
+				delay(pause/4);
+				GPIOC->BSRR = GPIO_BSRR_BS8;
+				delay(pause/4);
+				break;
+				
+				case 5:
+        button = 0;
+				break;
+				
+		}			
 	}
 }

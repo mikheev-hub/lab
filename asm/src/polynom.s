@@ -52,6 +52,7 @@ main
 	MOV      R6, #0x1                   ; result = 1
 	MOV      R8, #0x0                   ; len
 	MOV32    R1, #0x20000200
+
 	
 for
     CMP      R7, R2
@@ -61,14 +62,16 @@ for
 
 	BL       pow
 	CMP      R7, R2
-	IT       LS
+	ITT      LS
 	MULLS    R10, R6, R11                ; a * pow
+	MOVLS    R6, #0x1                    ; res = 0 after all
     CMP      R7, R2
 	ITTTT    LS
 	ADDLS    R4, R4, R10                ; sum += x
     ADDLS    R7, #0x1                   ; i++
-    ADDLS    R1, #0x1                   ; k[i] 
-    BLS      for    
+    ADDLS    R1, #0x1                   ; k[i]  
+  
+	BLS      for    
 	
 	ENDP
 	
@@ -79,7 +82,7 @@ pow         PROC
     MULLT   R6, R6, R3                 ; rez = rez * x	
 	ADDLT   R5, #0x1                   ; i++
 	BLT     pow
-	MOV     R5, #0x0
+	MOV     R5, #0x0                   ; i = 0 after all pow
 	BX      LR
 	ENDP
 		
