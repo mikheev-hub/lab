@@ -45,10 +45,6 @@ int main()
 
 	while(1)
 	{
-		pwm(button);
-		if (button > 10)
-			  button = 1;
-		
 		if(GPIOA->IDR & GPIO_IDR_IDR0)
 		{
 			delay(1);

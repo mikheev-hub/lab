@@ -19,8 +19,8 @@ void EXTI0_IRQHandler(void)
 
 	if (EXTI->PR & EXTI_PR_PR0) 		
 	{
-		EXTI->PR |= EXTI_PR_PR0;	
-		delay(10000);					
+		EXTI->PR |= EXTI_PR_PR0;
+    delay(100000);		
 		if(cnt >= 6)
 			cnt = 1;
 		else
