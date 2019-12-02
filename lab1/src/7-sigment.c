@@ -11,7 +11,7 @@ void EXTI0_IRQHandler(void)
 		  for(int i = 0; i<2500; i++){}
 		  if(GPIOC->IDR & GPIO_IDR_IDR0)
 			{
-				cnt += 1;
+          cnt += 1;
 			}
 		}
 		GPIOA->ODR = display[3];
@@ -32,7 +32,7 @@ void displayBegin()
                               0x4C,  //7
                               0x7F,  //8
                               0x6F   //9
-											   };
+                         };
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 	GPIOA->CRL   |= 0x33333333;
 }
@@ -62,7 +62,7 @@ void delay(uint32_t coun)
 int main()
 {
     displayBegin();
-	  extiBegin();
+    extiBegin();
 
 
     while(1)
