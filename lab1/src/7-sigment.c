@@ -9,12 +9,8 @@ void EXTI0_IRQHandler(void)
     if(EXTI->PR & EXTI_PR_PR0)			
     {
         for(int i = 0; i<2500; i++){}
-        if(GPIOC->IDR & GPIO_IDR_IDR0)
-        {
-            cnt += 1;
-        }
+        cnt += 1;   
     }
-    GPIOA->ODR = display[3];
     EXTI->PR |= EXTI_PR_PR0;
 }
 
@@ -22,7 +18,7 @@ void EXTI0_IRQHandler(void)
 void displayBegin()
 {
     uint16_t display[10]={
-                              0xff,  //0
+                              0x7E,  //0
                               0x48,  //1
                               0x3D,  //2
                               0x6D,  //3
@@ -34,20 +30,20 @@ void displayBegin()
                               0x6F   //9
                          };
     RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-    GPIOA->CRL   |= 0x33333333;
+    GPIOA->CRL    = 0x33333333;
 }
 
 void extiBegin()
 {
     RCC->APB2ENR |=   (RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN);
     GPIOC->CRL   &=~  (GPIO_CRL_CNF0 | GPIO_CRL_MODE0);
-    GPIOC->CRL   |=   GPIO_CRL_CNF0_1;
+    GPIOC->CRL   |=    GPIO_CRL_CNF0_1;
+	  GPIOC->BSRR  |=    GPIO_BSRR_BR0;
 	
     EXTI->FTSR      &=~ EXTI_FTSR_TR0;    // Triggered on falling signal
     EXTI->RTSR      |=  EXTI_RTSR_TR0;
     AFIO->EXTICR[0] |=  AFIO_EXTICR1_EXTI0_PC;
-
-    EXTI->PR        |=  EXTI_PR_PR0;	    //	flag of interrupt (call of interrupt) 				
+			
     EXTI->IMR       |=  EXTI_IMR_MR0;			//  access of interrup of appropriate channel 		
     EXTI->EMR       |=  EXTI_EMR_MR0;     //  event on channel 
 
@@ -64,8 +60,8 @@ int main()
     displayBegin();
     extiBegin();
 
-
     while(1)
     {
+		    GPIOA->ODR = display[cnt];
     }
 }

@@ -5,11 +5,12 @@ Component: ARM Compiler 5.06 update 4 (build 422) Tool: armlink [4d35d2]
 Section Cross References
 
     7-sigment.o(i.EXTI0_IRQHandler) refers to 7-sigment.o(.data) for cnt
-    7-sigment.o(i.EXTI0_IRQHandler) refers to 7-sigment.o(.bss) for display
     7-sigment.o(i.displayBegin) refers to rt_memcpy_w.o(.text) for __aeabi_memcpy4
     7-sigment.o(i.displayBegin) refers to 7-sigment.o(.constdata) for .constdata
     7-sigment.o(i.main) refers to 7-sigment.o(i.displayBegin) for displayBegin
     7-sigment.o(i.main) refers to 7-sigment.o(i.extiBegin) for extiBegin
+    7-sigment.o(i.main) refers to 7-sigment.o(.bss) for display
+    7-sigment.o(i.main) refers to 7-sigment.o(.data) for cnt
     startup_stm32f10x_md_vl.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_stm32f10x_md_vl.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_stm32f10x_md_vl.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -259,15 +260,15 @@ Image Symbol Table
     .text                                    0x080002d8   Section        2  use_no_semi.o(.text)
     .text                                    0x080002da   Section        0  indicate_semi.o(.text)
     i.EXTI0_IRQHandler                       0x080002dc   Section        0  7-sigment.o(i.EXTI0_IRQHandler)
-    i.SetSysClock                            0x08000334   Section        0  system_stm32f10x.o(i.SetSysClock)
-    SetSysClock                              0x08000335   Thumb Code     8  system_stm32f10x.o(i.SetSysClock)
-    i.SetSysClockTo24                        0x0800033c   Section        0  system_stm32f10x.o(i.SetSysClockTo24)
-    SetSysClockTo24                          0x0800033d   Thumb Code   178  system_stm32f10x.o(i.SetSysClockTo24)
-    i.SystemInit                             0x080003f4   Section        0  system_stm32f10x.o(i.SystemInit)
-    i.displayBegin                           0x08000458   Section        0  7-sigment.o(i.displayBegin)
-    i.extiBegin                              0x08000490   Section        0  7-sigment.o(i.extiBegin)
-    i.main                                   0x08000530   Section        0  7-sigment.o(i.main)
-    .constdata                               0x0800053c   Section       20  7-sigment.o(.constdata)
+    i.SetSysClock                            0x08000314   Section        0  system_stm32f10x.o(i.SetSysClock)
+    SetSysClock                              0x08000315   Thumb Code     8  system_stm32f10x.o(i.SetSysClock)
+    i.SetSysClockTo24                        0x0800031c   Section        0  system_stm32f10x.o(i.SetSysClockTo24)
+    SetSysClockTo24                          0x0800031d   Thumb Code   178  system_stm32f10x.o(i.SetSysClockTo24)
+    i.SystemInit                             0x080003d4   Section        0  system_stm32f10x.o(i.SystemInit)
+    i.displayBegin                           0x08000438   Section        0  7-sigment.o(i.displayBegin)
+    i.extiBegin                              0x0800046c   Section        0  7-sigment.o(i.extiBegin)
+    i.main                                   0x08000508   Section        0  7-sigment.o(i.main)
+    .constdata                               0x08000530   Section       20  7-sigment.o(.constdata)
     .data                                    0x20000000   Section        4  7-sigment.o(.data)
     .bss                                     0x20000004   Section       20  7-sigment.o(.bss)
     .bss                                     0x20000018   Section       96  libspace.o(.bss)
@@ -429,13 +430,13 @@ Image Symbol Table
     __I$use$semihosting                      0x080002d9   Thumb Code     0  use_no_semi.o(.text)
     __use_no_semihosting_swi                 0x080002d9   Thumb Code     2  use_no_semi.o(.text)
     __semihosting_library_function           0x080002db   Thumb Code     0  indicate_semi.o(.text)
-    EXTI0_IRQHandler                         0x080002dd   Thumb Code    66  7-sigment.o(i.EXTI0_IRQHandler)
-    SystemInit                               0x080003f5   Thumb Code    82  system_stm32f10x.o(i.SystemInit)
-    displayBegin                             0x08000459   Thumb Code    42  7-sigment.o(i.displayBegin)
-    extiBegin                                0x08000491   Thumb Code   144  7-sigment.o(i.extiBegin)
-    main                                     0x08000531   Thumb Code    12  7-sigment.o(i.main)
-    Region$$Table$$Base                      0x08000550   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000570   Number         0  anon$$obj.o(Region$$Table)
+    EXTI0_IRQHandler                         0x080002dd   Thumb Code    48  7-sigment.o(i.EXTI0_IRQHandler)
+    SystemInit                               0x080003d5   Thumb Code    82  system_stm32f10x.o(i.SystemInit)
+    displayBegin                             0x08000439   Thumb Code    38  7-sigment.o(i.displayBegin)
+    extiBegin                                0x0800046d   Thumb Code   138  7-sigment.o(i.extiBegin)
+    main                                     0x08000509   Thumb Code    26  7-sigment.o(i.main)
+    Region$$Table$$Base                      0x08000544   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000564   Number         0  anon$$obj.o(Region$$Table)
     cnt                                      0x20000000   Data           4  7-sigment.o(.data)
     display                                  0x20000004   Data          20  7-sigment.o(.bss)
     __libspace_start                         0x20000018   Data          96  libspace.o(.bss)
@@ -449,9 +450,9 @@ Memory Map of the image
 
   Image Entry point : 0x080001bd
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00000574, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00000568, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x08000000, Size: 0x00000570, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x08000000, Size: 0x00000564, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -514,15 +515,15 @@ Memory Map of the image
     0x080002d8   0x00000002   Code   RO          243    .text               c_w.l(use_no_semi.o)
     0x080002da   0x00000000   Code   RO          245    .text               c_w.l(indicate_semi.o)
     0x080002da   0x00000002   PAD
-    0x080002dc   0x00000058   Code   RO            4    i.EXTI0_IRQHandler  7-sigment.o
-    0x08000334   0x00000008   Code   RO           90    i.SetSysClock       system_stm32f10x.o
-    0x0800033c   0x000000b8   Code   RO           91    i.SetSysClockTo24   system_stm32f10x.o
-    0x080003f4   0x00000064   Code   RO           93    i.SystemInit        system_stm32f10x.o
-    0x08000458   0x00000038   Code   RO            6    i.displayBegin      7-sigment.o
-    0x08000490   0x000000a0   Code   RO            7    i.extiBegin         7-sigment.o
-    0x08000530   0x0000000c   Code   RO            8    i.main              7-sigment.o
-    0x0800053c   0x00000014   Data   RO           10    .constdata          7-sigment.o
-    0x08000550   0x00000020   Data   RO          298    Region$$Table       anon$$obj.o
+    0x080002dc   0x00000038   Code   RO            4    i.EXTI0_IRQHandler  7-sigment.o
+    0x08000314   0x00000008   Code   RO           90    i.SetSysClock       system_stm32f10x.o
+    0x0800031c   0x000000b8   Code   RO           91    i.SetSysClockTo24   system_stm32f10x.o
+    0x080003d4   0x00000064   Code   RO           93    i.SystemInit        system_stm32f10x.o
+    0x08000438   0x00000034   Code   RO            6    i.displayBegin      7-sigment.o
+    0x0800046c   0x0000009c   Code   RO            7    i.extiBegin         7-sigment.o
+    0x08000508   0x00000028   Code   RO            8    i.main              7-sigment.o
+    0x08000530   0x00000014   Data   RO           10    .constdata          7-sigment.o
+    0x08000544   0x00000020   Data   RO          298    Region$$Table       anon$$obj.o
 
 
     Execution Region ER_RW (Base: 0x20000000, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
@@ -549,12 +550,12 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       316         52         20          4         20     235342   7-sigment.o
+       304         54         20          4         20     235342   7-sigment.o
         64         26        288          0       1536        820   startup_stm32f10x_md_vl.o
        292         24          0          0          0       1953   system_stm32f10x.o
 
     ----------------------------------------------------------------------
-       672        102        340          4       1556     238115   Object Totals
+       660        104        340          4       1556     238115   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -604,15 +605,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1052        118        340          4       1652     238359   Grand Totals
-      1052        118        340          4       1652     238359   ELF Image Totals
-      1052        118        340          4          0          0   ROM Totals
+      1040        120        340          4       1652     238359   Grand Totals
+      1040        120        340          4       1652     238359   ELF Image Totals
+      1040        120        340          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1392 (   1.36kB)
+    Total RO  Size (Code + RO Data)                 1380 (   1.35kB)
     Total RW  Size (RW Data + ZI Data)              1656 (   1.62kB)
-    Total ROM Size (Code + RO Data + RW Data)       1396 (   1.36kB)
+    Total ROM Size (Code + RO Data + RW Data)       1384 (   1.35kB)
 
 ==============================================================================
 
