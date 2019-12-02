@@ -390,9 +390,9 @@
               <FilePath>..\src\stm32f10x.s</FilePath>
             </File>
             <File>
-              <FileName>strcmp.s</FileName>
+              <FileName>polynom2.0.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\src\strcmp.s</FilePath>
+              <FilePath>..\src\polynom2.0.s</FilePath>
             </File>
           </Files>
         </Group>

@@ -23,8 +23,9 @@ main
 	STR      R10, [R1]
 	LDR      R11, [R1]
 	ADD      R1, #0x1
+
 	
-	MOV      R10, #0x2
+ 	MOV      R10, #0x2
 	STR      R10, [R1]
 	LDR      R11, [R1]
 	ADD      R1, #0x1
@@ -51,47 +52,45 @@ main
 	MOV      R7, #0x0                   ; i = 0 для for
 	MOV      R6, #0x1                   ; result = 1
 	MOV      R8, #0x0                   ; len
-	MOV32    R1, #0x20000200
-
-    Здесь будет вызов двух подпрограмм, это pow и sum
-loop
-
-BL loop
 	
-for
-    CMP      R7, R2
-	ITT      LS
+	MOV32    R1, #START_ADDRESS 
+	
+loop
+	CMP      R7, R2
+	ITTT     LS
 	LDRSBLS  R11, [R1]                  ; int a = k[i]
 	SUBLS    R8, R2, R7                 ; len - i
-
-	BL       pow
+	BLLS     pow
 	CMP      R7, R2
-	ITT      LS
-	MULLS    R10, R6, R11                ; a * pow
-	MOVLS    R6, #0x1                    ; res = 0 after all
-    CMP      R7, R2
-	ITTTT    LS
-	ADDLS    R4, R4, R10                ; sum += x
-    ADDLS    R7, #0x1                   ; i++
-    ADDLS    R1, #0x1                   ; k[i]  
-  
-	BLS      for    
+	BLS      loop
 	
 	ENDP
 	
-
-pow         PROC
-	PUSH    {R2, R3, R4, R7, R8}
+pow    PROC	
+	PUSH   {LR}
 	CMP     R5, R8                    
     ITTT    LT
     MULLT   R6, R6, R3                 ; rez = rez * x	
 	ADDLT   R5, #0x1                   ; i++
 	BLT     pow
 	MOV     R5, #0x0                   ; i = 0 after all pow
-	POP     {R8, R7, R4, R3, R2}
-	BX      LR
-	ENDP
+	BL      sum
+    ENDP
 		
+sum    PROC
+	POP     {LR}      
+	CMP      R7, R2
+	ITT      LS
+	MULLS    R10, R6, R11                ; a * pow
+	MOVLS    R6, #0x1                    ; res = 0 after all
+    CMP      R7, R2
+	ITTT     LS
+	ADDLS    R4, R4, R10                ; sum += x
+    ADDLS    R7, #0x1                   ; i++
+    ADDLS    R1, #0x1                   ; k[i]
+	CMP      R7, R2
+	BXLS     LR
+    ENDP
 		
 	END
     	

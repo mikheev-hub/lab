@@ -21500,104 +21500,101 @@ ARM Macro Assembler    Page 331
               F2C2 0100        MOV32            R1, #START_ADDRESS
    21 00000010         
    22 00000010 F04F 0A01       MOV              R10, #0x1
-   23 00000014 F881 A000       STRB             R10, [R1, #0x0]
-   24 00000018 F891 B000       LDRB             R11, [R1, #0x0]
-   25 0000001C         
-   26 0000001C         
-   27 0000001C         ;ADD      R1,  #0x1
-   28 0000001C F04F 0A02       MOV              R10, #0x2
-   29 00000020 F881 A001       STRB             R10, [R1, #0x1]
-   30 00000024 F891 B001       LDRB             R11, [R1, #0x1]
-   31 00000028 F101 0101       ADD              R1, #0x1
-   32 0000002C         
-   33 0000002C F04F 0A03       MOV              R10, #0x3
-   34 00000030 F8C1 A000       STR              R10, [R1]
-   35 00000034 F8D1 B000       LDR              R11, [R1]
+   23 00000014 F8C1 A000       STR              R10, [R1]
+   24 00000018 F8D1 B000       LDR              R11, [R1]
+   25 0000001C F101 0101       ADD              R1, #0x1
+   26 00000020         
+   27 00000020         
+   28 00000020 F04F 0A02       MOV              R10, #0x2
+   29 00000024 F8C1 A000       STR              R10, [R1]
+   30 00000028 F8D1 B000       LDR              R11, [R1]
+   31 0000002C F101 0101       ADD              R1, #0x1
+   32 00000030         
+   33 00000030 F04F 0A03       MOV              R10, #0x3
+   34 00000034 F8C1 A000       STR              R10, [R1]
+   35 00000038 F8D1 B000       LDR              R11, [R1]
 
 
 
 ARM Macro Assembler    Page 332 
 
 
-   36 00000038 F101 0101       ADD              R1, #0x1
-   37 0000003C         
-   38 0000003C F04F 0A04       MOV              R10, #0x4
-   39 00000040 F8C1 A000       STR              R10, [R1]
-   40 00000044 F8D1 B000       LDR              R11, [R1]
-   41 00000048 F101 0101       ADD              R1,  #0x1
-   42 0000004C         
-   43 0000004C F04F 0A05       MOV              R10, #0x5
-   44 00000050 F8C1 A000       STR              R10, [R1]
-   45 00000054 F8D1 B000       LDR              R11, [R1]
-   46 00000058         
-   47 00000058         
-   48 00000058 F04F 0204       MOV              R2, #0x4    ; Степень п
+   36 0000003C F101 0101       ADD              R1, #0x1
+   37 00000040         
+   38 00000040 F04F 0A04       MOV              R10, #0x4
+   39 00000044 F8C1 A000       STR              R10, [R1]
+   40 00000048 F8D1 B000       LDR              R11, [R1]
+   41 0000004C F101 0101       ADD              R1,  #0x1
+   42 00000050         
+   43 00000050 F04F 0A05       MOV              R10, #0x5
+   44 00000054 F8C1 A000       STR              R10, [R1]
+   45 00000058 F8D1 B000       LDR              R11, [R1]
+   46 0000005C         
+   47 0000005C         
+   48 0000005C F04F 0204       MOV              R2, #0x4    ; Степень п
                                                             олинома
-   49 0000005C F04F 0302       MOV              R3, #0x2    ; Значение 
+   49 00000060 F04F 0302       MOV              R3, #0x2    ; Значение 
                                                             х
-   50 00000060 F04F 0400       MOV              R4, #0x0    ; sum = 0
-   51 00000064 F04F 0500       MOV              R5, #0x0    ; i = 0 для pow
-   52 00000068 F04F 0700       MOV              R7, #0x0    ; i = 0 для for
-   53 0000006C F04F 0601       MOV              R6, #0x1    ; result = 1
-   54 00000070 F04F 0800       MOV              R8, #0x0    ; len
-   55 00000074 F240 2100 
-              F2C2 0100        MOV32            R1, #0x20000200
-   56 0000007C         
-   57 0000007C         ;Здесь будет вызов двух подпро�
-                       �рамм, это pow и sum
-   58 0000007C         ;loop
-   59 0000007C         
-   60 0000007C         ;BL loop
-   61 0000007C         
-   62 0000007C         for
-   63 0000007C 4297            CMP              R7, R2
-   64 0000007E BF9C            ITT              LS
-   65 00000080 F991 B000       LDRSBLS          R11, [R1]   ; int a = k[i]
-   66 00000084 EBA2 0807       SUBLS            R8, R2, R7  ; len - i
-   67 00000088         
-   68 00000088 F7FF FFFE       BL               pow
-   69 0000008C 4297            CMP              R7, R2
-   70 0000008E BF9C            ITT              LS
-   71 00000090 FB06 FA0B       MULLS            R10, R6, R11 ; a * pow
-   72 00000094 2601            MOVLS            R6, #0x1    ; res = 0 after all
+   50 00000064 F04F 0400       MOV              R4, #0x0    ; sum = 0
+   51 00000068 F04F 0500       MOV              R5, #0x0    ; i = 0 для pow
+   52 0000006C F04F 0700       MOV              R7, #0x0    ; i = 0 для for
+   53 00000070 F04F 0601       MOV              R6, #0x1    ; result = 1
+   54 00000074 F04F 0800       MOV              R8, #0x0    ; len
+   55 00000078         
+   56 00000078 F240 2100 
+              F2C2 0100        MOV32            R1, #START_ADDRESS
+   57 00000080         
+   58 00000080         loop
+   59 00000080 4297            CMP              R7, R2
+   60 00000082 BF9E            ITTT             LS
+   61 00000084 F991 B000       LDRSBLS          R11, [R1]   ; int a = k[i]
+   62 00000088 EBA2 0807       SUBLS            R8, R2, R7  ; len - i
+   63 0000008C F7FF FFFE       BLLS             pow
+   64 00000090 4297            CMP              R7, R2
+   65 00000092 D9F5            BLS              loop
+   66 00000094         
+   67 00000094                 ENDP
+   68 00000094         
+   69 00000094         pow     PROC
+   70 00000094 B500            PUSH             {LR}
+   71 00000096 4545            CMP              R5, R8
+   72 00000098 BFBE            ITTT             LT
+   73 0000009A FB06 F603       MULLT            R6, R6, R3  ; rez = rez * x 
+   74 0000009E 3501            ADDLT            R5, #0x1    ; i++
+   75 000000A0 E7FE            BLT              pow
+   76 000000A2 F04F 0500       MOV              R5, #0x0    ; i = 0 after all p
+                                                            ow
+   77 000000A6 F7FF FFFE       BL               sum
+   78 000000AA                 ENDP
+   79 000000AA         
+   80 000000AA         sum     PROC
+   81 000000AA F85D EB04       POP              {LR}
+   82 000000AE 4297            CMP              R7, R2
+   83 000000B0 BF9C            ITT              LS
+   84 000000B2 FB06 FA0B       MULLS            R10, R6, R11 ; a * pow
+   85 000000B6 2601            MOVLS            R6, #0x1    ; res = 0 after all
                                                             
-   73 00000096 4297            CMP              R7, R2
-   74 00000098 BF9F            ITTTT            LS
-   75 0000009A 4454            ADDLS            R4, R4, R10 ; sum += x
-   76 0000009C 3701            ADDLS            R7, #0x1    ; i++
-   77 0000009E 3101            ADDLS            R1, #0x1    ; k[i]  
-   78 000000A0         
-   79 000000A0 E7EC            BLS              for
-   80 000000A2         
-   81 000000A2                 ENDP
-   82 000000A2         
-   83 000000A2         
-   84 000000A2         pow     PROC
-   85 000000A2 E92D 019C       PUSH             {R2, R3, R4, R7, R8}
-   86 000000A6 4545            CMP              R5, R8
-   87 000000A8 BFBE            ITTT             LT
-   88 000000AA FB06 F603       MULLT            R6, R6, R3  ; rez = rez * x 
-   89 000000AE 3501            ADDLT            R5, #0x1    ; i++
+   86 000000B8 4297            CMP              R7, R2
+   87 000000BA BF9E            ITTT             LS
+   88 000000BC 4454            ADDLS            R4, R4, R10 ; sum += x
+   89 000000BE 3701            ADDLS            R7, #0x1    ; i++
 
 
 
 ARM Macro Assembler    Page 333 
 
 
-   90 000000B0 E7FE            BLT              pow
-   91 000000B2 F04F 0500       MOV              R5, #0x0    ; i = 0 after all p
-                                                            ow
-   92 000000B6 E8BD 019C       POP              {R8, R7, R4, R3, R2}
-   93 000000BA 4770            BX               LR
-   94 000000BC                 ENDP
-   95 000000BC         
-   96 000000BC         
-   97 000000BC                 END
+   90 000000C0 3101            ADDLS            R1, #0x1    ; k[i]
+   91 000000C2 4297            CMP              R7, R2
+   92 000000C4 BF98 4770       BXLS             LR
+   93 000000C8                 ENDP
+   94 000000C8         
+   95 000000C8                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=.\objects\polynom.d -o.\objects\polynom.o -I.\RTE\_Target_1 -IC:\K
-eil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\
-Include --predefine="__UVISION_VERSION SETA 523" --predefine="STM32F10X_MD_VL S
-ETA 1" --list=.\listings\polynom.lst ..\src\polynom.s
+ork --depend=.\objects\polynom2.0.d -o.\objects\polynom2.0.o -I.\RTE\_Target_1 
+-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include -IC:\Keil_v5\ARM\
+CMSIS\Include --predefine="__UVISION_VERSION SETA 523" --predefine="STM32F10X_M
+D_VL SETA 1" --list=.\listings\polynom2.0.lst ..\src\polynom2.0.s
 
 
 
@@ -21608,7 +21605,7 @@ RESET 00000000
 
 Symbol: RESET
    Definitions
-      At line 7 in file ..\src\polynom.s
+      At line 7 in file ..\src\polynom2.0.s
    Uses
       None
 Comment: RESET unused
@@ -21616,37 +21613,45 @@ Reset_Handler 00000008
 
 Symbol: Reset_Handler
    Definitions
-      At line 15 in file ..\src\polynom.s
+      At line 15 in file ..\src\polynom2.0.s
    Uses
-      At line 11 in file ..\src\polynom.s
-      At line 16 in file ..\src\polynom.s
+      At line 11 in file ..\src\polynom2.0.s
+      At line 16 in file ..\src\polynom2.0.s
 
-for 0000007C
+loop 00000080
 
-Symbol: for
+Symbol: loop
    Definitions
-      At line 62 in file ..\src\polynom.s
+      At line 58 in file ..\src\polynom2.0.s
    Uses
-      At line 79 in file ..\src\polynom.s
-Comment: for used once
+      At line 65 in file ..\src\polynom2.0.s
+Comment: loop used once
 main 00000008
 
 Symbol: main
    Definitions
-      At line 19 in file ..\src\polynom.s
+      At line 19 in file ..\src\polynom2.0.s
    Uses
       None
 Comment: main unused
-pow 000000A2
+pow 00000094
 
 Symbol: pow
    Definitions
-      At line 84 in file ..\src\polynom.s
+      At line 69 in file ..\src\polynom2.0.s
    Uses
-      At line 68 in file ..\src\polynom.s
-      At line 90 in file ..\src\polynom.s
+      At line 63 in file ..\src\polynom2.0.s
+      At line 75 in file ..\src\polynom2.0.s
 
-5 symbols
+sum 000000AA
+
+Symbol: sum
+   Definitions
+      At line 80 in file ..\src\polynom2.0.s
+   Uses
+      At line 77 in file ..\src\polynom2.0.s
+Comment: sum used once
+6 symbols
 
 
 
@@ -59922,7 +59927,7 @@ Symbol: STACK_TOP
    Definitions
       At line 3 in file ..\src\config.s
    Uses
-      At line 10 in file ..\src\polynom.s
+      At line 10 in file ..\src\polynom2.0.s
 Comment: STACK_TOP used once
 START_ADDRESS 20000200
 
@@ -59930,13 +59935,14 @@ Symbol: START_ADDRESS
    Definitions
       At line 5 in file ..\src\config.s
    Uses
-      At line 20 in file ..\src\polynom.s
-Comment: START_ADDRESS used once
+      At line 20 in file ..\src\polynom2.0.s
+      At line 56 in file ..\src\polynom2.0.s
 
 
 
 ARM Macro Assembler    Page 590 Alphabetic symbol ordering
 Absolute symbols
+
 
 START_ADDRESS1 20000200
 
@@ -59996,13 +60002,13 @@ Symbol: SYSTICKRVR
 Comment: SYSTICKRVR unused
 SysTick_CALIB_NOREF 80000000
 
-Symbol: SysTick_CALIB_NOREF
 
 
 
 ARM Macro Assembler    Page 591 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: SysTick_CALIB_NOREF
    Definitions
       At line 2149 in file ..\src\stm32f10x.s
    Uses
@@ -60061,13 +60067,13 @@ SysTick_LOAD_RELOAD 00FFFFFF
 Symbol: SysTick_LOAD_RELOAD
    Definitions
       At line 2141 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 592 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: SysTick_LOAD_RELOAD unused
 SysTick_VAL_CURRENT 00FFFFFF
@@ -60126,13 +60132,13 @@ Symbol: TIM1_CCMR1
    Uses
       None
 Comment: TIM1_CCMR1 unused
-TIM1_CCMR2 40012C1C
 
 
 
 ARM Macro Assembler    Page 593 Alphabetic symbol ordering
 Absolute symbols
 
+TIM1_CCMR2 40012C1C
 
 Symbol: TIM1_CCMR2
    Definitions
@@ -60191,13 +60197,13 @@ Comment: TIM1_CR1 unused
 TIM1_CR2 40012C04
 
 Symbol: TIM1_CR2
-   Definitions
 
 
 
 ARM Macro Assembler    Page 594 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 415 in file ..\src\stm32f10x.s
    Uses
       None
@@ -60256,13 +60262,13 @@ Symbol: TIM1_PSC
    Definitions
       At line 426 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 595 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: TIM1_PSC unused
 TIM1_RCR 40012C30
 
@@ -60324,9 +60330,9 @@ TIM2_CCMR1 40000018
 
 
 
-
 ARM Macro Assembler    Page 596 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: TIM2_CCMR1
    Definitions
@@ -60386,13 +60392,13 @@ TIM2_CR1 40000000
 
 Symbol: TIM2_CR1
    Definitions
-      At line 458 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 597 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 458 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: TIM2_CR1 unused
@@ -60451,13 +60457,13 @@ Symbol: TIM2_OCMR2
       At line 467 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: TIM2_OCMR2 unused
 
 
 
 ARM Macro Assembler    Page 598 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: TIM2_OCMR2 unused
 TIM2_PSC 40000028
 
 Symbol: TIM2_PSC
@@ -60516,13 +60522,13 @@ Symbol: TIM3_CCER
 Comment: TIM3_CCER unused
 TIM3_CCMR1 40000418
 
-Symbol: TIM3_CCMR1
 
 
 
 ARM Macro Assembler    Page 599 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: TIM3_CCMR1
    Definitions
       At line 484 in file ..\src\stm32f10x.s
    Uses
@@ -60581,13 +60587,13 @@ TIM3_CR1 40000400
 Symbol: TIM3_CR1
    Definitions
       At line 478 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 600 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: TIM3_CR1 unused
 TIM3_CR2 40000404
@@ -60646,13 +60652,13 @@ Symbol: TIM3_OCMR2
    Uses
       None
 Comment: TIM3_OCMR2 unused
-TIM3_PSC 40000428
 
 
 
 ARM Macro Assembler    Page 601 Alphabetic symbol ordering
 Absolute symbols
 
+TIM3_PSC 40000428
 
 Symbol: TIM3_PSC
    Definitions
@@ -60711,13 +60717,13 @@ Comment: TIM4_CCER unused
 TIM4_CCMR1 40000818
 
 Symbol: TIM4_CCMR1
-   Definitions
 
 
 
 ARM Macro Assembler    Page 602 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 504 in file ..\src\stm32f10x.s
    Uses
       None
@@ -60776,13 +60782,13 @@ Symbol: TIM4_CR1
    Definitions
       At line 498 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 603 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: TIM4_CR1 unused
 TIM4_CR2 40000804
 
@@ -60844,9 +60850,9 @@ TIM4_PSC 40000828
 
 
 
-
 ARM Macro Assembler    Page 604 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: TIM4_PSC
    Definitions
@@ -60906,13 +60912,13 @@ TIM5_CCMR1 40000C18
 
 Symbol: TIM5_CCMR1
    Definitions
-      At line 524 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 605 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 524 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: TIM5_CCMR1 unused
@@ -60971,13 +60977,13 @@ Symbol: TIM5_CR1
       At line 518 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: TIM5_CR1 unused
 
 
 
 ARM Macro Assembler    Page 606 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: TIM5_CR1 unused
 TIM5_CR2 40000C04
 
 Symbol: TIM5_CR2
@@ -61036,13 +61042,13 @@ Symbol: TIM5_OCMR2
 Comment: TIM5_OCMR2 unused
 TIM5_PSC 40000C28
 
-Symbol: TIM5_PSC
 
 
 
 ARM Macro Assembler    Page 607 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: TIM5_PSC
    Definitions
       At line 530 in file ..\src\stm32f10x.s
    Uses
@@ -61101,13 +61107,13 @@ TIM6_CR1 40001000
 Symbol: TIM6_CR1
    Definitions
       At line 538 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 608 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: TIM6_CR1 unused
 TIM6_CR2 40001004
@@ -61166,13 +61172,13 @@ Symbol: TIM7_ARR
    Uses
       None
 Comment: TIM7_ARR unused
-TIM7_BASE 40001400
 
 
 
 ARM Macro Assembler    Page 609 Alphabetic symbol ordering
 Absolute symbols
 
+TIM7_BASE 40001400
 
 Symbol: TIM7_BASE
    Definitions
@@ -61231,13 +61237,13 @@ Comment: TIM7_PSC unused
 TIM7_SR 40001410
 
 Symbol: TIM7_SR
-   Definitions
 
 
 
 ARM Macro Assembler    Page 610 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 549 in file ..\src\stm32f10x.s
    Uses
       None
@@ -61296,13 +61302,13 @@ Symbol: TIM8_CCMR2
    Definitions
       At line 444 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 611 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: TIM8_CCMR2 unused
 TIM8_CCR1 40013434
 
@@ -61364,9 +61370,9 @@ TIM8_DCR 40013448
 
 
 
-
 ARM Macro Assembler    Page 612 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: TIM8_DCR
    Definitions
@@ -61426,13 +61432,13 @@ TIM8_RCR 40013430
 
 Symbol: TIM8_RCR
    Definitions
-      At line 450 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 613 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 450 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: TIM8_RCR unused
@@ -61491,13 +61497,13 @@ Symbol: TIM_BDTR_DTG
       At line 3632 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: TIM_BDTR_DTG unused
 
 
 
 ARM Macro Assembler    Page 614 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: TIM_BDTR_DTG unused
 TIM_BDTR_DTG_0 00000001
 
 Symbol: TIM_BDTR_DTG_0
@@ -61556,13 +61562,13 @@ Symbol: TIM_BDTR_DTG_6
 Comment: TIM_BDTR_DTG_6 unused
 TIM_BDTR_DTG_7 00000080
 
-Symbol: TIM_BDTR_DTG_7
 
 
 
 ARM Macro Assembler    Page 615 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: TIM_BDTR_DTG_7
    Definitions
       At line 3640 in file ..\src\stm32f10x.s
    Uses
@@ -61621,13 +61627,13 @@ TIM_CCER_CC1E 00000001
 Symbol: TIM_CCER_CC1E
    Definitions
       At line 3592 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 616 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: TIM_CCER_CC1E unused
 TIM_CCER_CC1NE 00000004
@@ -61686,13 +61692,13 @@ Symbol: TIM_CCER_CC2P
    Uses
       None
 Comment: TIM_CCER_CC2P unused
-TIM_CCER_CC3E 00000100
 
 
 
 ARM Macro Assembler    Page 617 Alphabetic symbol ordering
 Absolute symbols
 
+TIM_CCER_CC3E 00000100
 
 Symbol: TIM_CCER_CC3E
    Definitions
@@ -61751,13 +61757,13 @@ Comment: TIM_CCMR1_CC1S unused
 TIM_CCMR1_CC1S_0 00000001
 
 Symbol: TIM_CCMR1_CC1S_0
-   Definitions
 
 
 
 ARM Macro Assembler    Page 618 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 3491 in file ..\src\stm32f10x.s
    Uses
       None
@@ -61816,13 +61822,13 @@ Symbol: TIM_CCMR1_IC1F_1
    Definitions
       At line 3526 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 619 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: TIM_CCMR1_IC1F_1 unused
 TIM_CCMR1_IC1F_2 00000040
 
@@ -61884,9 +61890,9 @@ TIM_CCMR1_IC2F_1 00002000
 
 
 
-
 ARM Macro Assembler    Page 620 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: TIM_CCMR1_IC2F_1
    Definitions
@@ -61946,13 +61952,13 @@ TIM_CCMR1_OC1FE 00000004
 
 Symbol: TIM_CCMR1_OC1FE
    Definitions
-      At line 3494 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 621 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 3494 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: TIM_CCMR1_OC1FE unused
@@ -62011,13 +62017,13 @@ Symbol: TIM_CCMR1_OC2FE
       At line 3508 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: TIM_CCMR1_OC2FE unused
 
 
 
 ARM Macro Assembler    Page 622 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: TIM_CCMR1_OC2FE unused
 TIM_CCMR1_OC2M 00007000
 
 Symbol: TIM_CCMR1_OC2M
@@ -62076,13 +62082,13 @@ Symbol: TIM_CCMR2_CC3S_0
 Comment: TIM_CCMR2_CC3S_0 unused
 TIM_CCMR2_CC3S_1 00000002
 
-Symbol: TIM_CCMR2_CC3S_1
 
 
 
 ARM Macro Assembler    Page 623 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: TIM_CCMR2_CC3S_1
    Definitions
       At line 3543 in file ..\src\stm32f10x.s
    Uses
@@ -62141,13 +62147,13 @@ TIM_CCMR2_IC3F_2 00000040
 Symbol: TIM_CCMR2_IC3F_2
    Definitions
       At line 3578 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 624 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: TIM_CCMR2_IC3F_2 unused
 TIM_CCMR2_IC3F_3 00000080
@@ -62206,13 +62212,13 @@ Symbol: TIM_CCMR2_IC4F_1
    Uses
       None
 Comment: TIM_CCMR2_IC4F_1 unused
-TIM_CCMR2_IC4F_2 00004000
 
 
 
 ARM Macro Assembler    Page 625 Alphabetic symbol ordering
 Absolute symbols
 
+TIM_CCMR2_IC4F_2 00004000
 
 Symbol: TIM_CCMR2_IC4F_2
    Definitions
@@ -62271,13 +62277,13 @@ Comment: TIM_CCMR2_OC3FE unused
 TIM_CCMR2_OC3M 00000070
 
 Symbol: TIM_CCMR2_OC3M
-   Definitions
 
 
 
 ARM Macro Assembler    Page 626 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 3548 in file ..\src\stm32f10x.s
    Uses
       None
@@ -62336,13 +62342,13 @@ Symbol: TIM_CCMR2_OC4M
    Definitions
       At line 3562 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 627 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: TIM_CCMR2_OC4M unused
 TIM_CCMR2_OC4M_0 00001000
 
@@ -62404,9 +62410,9 @@ TIM_CCR4_CCR4 0000FFFF
 
 
 
-
 ARM Macro Assembler    Page 628 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: TIM_CCR4_CCR4
    Definitions
@@ -62466,13 +62472,13 @@ TIM_CR1_CMS 00000060
 
 Symbol: TIM_CR1_CMS
    Definitions
-      At line 3393 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 629 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 3393 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: TIM_CR1_CMS unused
@@ -62531,13 +62537,13 @@ Symbol: TIM_CR2_CCDS
       At line 3406 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: TIM_CR2_CCDS unused
 
 
 
 ARM Macro Assembler    Page 630 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: TIM_CR2_CCDS unused
 TIM_CR2_CCPC 00000001
 
 Symbol: TIM_CR2_CCPC
@@ -62596,13 +62602,13 @@ Symbol: TIM_CR2_OIS1
 Comment: TIM_CR2_OIS1 unused
 TIM_CR2_OIS1N 00000200
 
-Symbol: TIM_CR2_OIS1N
 
 
 
 ARM Macro Assembler    Page 631 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: TIM_CR2_OIS1N
    Definitions
       At line 3415 in file ..\src\stm32f10x.s
    Uses
@@ -62661,13 +62667,13 @@ TIM_DCR_DBA 0000001F
 Symbol: TIM_DCR_DBA
    Definitions
       At line 3654 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 632 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: TIM_DCR_DBA unused
 TIM_DCR_DBA_0 00000001
@@ -62726,13 +62732,13 @@ Symbol: TIM_DCR_DBL_0
    Uses
       None
 Comment: TIM_DCR_DBL_0 unused
-TIM_DCR_DBL_1 00000200
 
 
 
 ARM Macro Assembler    Page 633 Alphabetic symbol ordering
 Absolute symbols
 
+TIM_DCR_DBL_1 00000200
 
 Symbol: TIM_DCR_DBL_1
    Definitions
@@ -62791,13 +62797,13 @@ Comment: TIM_DIER_CC1IE unused
 TIM_DIER_CC2DE 00000400
 
 Symbol: TIM_DIER_CC2DE
-   Definitions
 
 
 
 ARM Macro Assembler    Page 634 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 3459 in file ..\src\stm32f10x.s
    Uses
       None
@@ -62856,13 +62862,13 @@ Symbol: TIM_DIER_COMIE
    Definitions
       At line 3454 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 635 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: TIM_DIER_COMIE unused
 TIM_DIER_TDE 00004000
 
@@ -62924,9 +62930,9 @@ TIM_EGR_CC2G 00000004
 
 
 
-
 ARM Macro Assembler    Page 636 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: TIM_EGR_CC2G
    Definitions
@@ -62986,13 +62992,13 @@ TIM_RCR_REP 000000FF
 
 Symbol: TIM_RCR_REP
    Definitions
-      At line 3617 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 637 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 3617 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: TIM_RCR_REP unused
@@ -63051,13 +63057,13 @@ Symbol: TIM_SMCR_ETP
       At line 3446 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: TIM_SMCR_ETP unused
 
 
 
 ARM Macro Assembler    Page 638 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: TIM_SMCR_ETP unused
 TIM_SMCR_ETPS 00003000
 
 Symbol: TIM_SMCR_ETPS
@@ -63116,13 +63122,13 @@ Symbol: TIM_SMCR_SMS_1
 Comment: TIM_SMCR_SMS_1 unused
 TIM_SMCR_SMS_2 00000004
 
-Symbol: TIM_SMCR_SMS_2
 
 
 
 ARM Macro Assembler    Page 639 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: TIM_SMCR_SMS_2
    Definitions
       At line 3426 in file ..\src\stm32f10x.s
    Uses
@@ -63181,13 +63187,13 @@ TIM_SR_CC1OF 00000200
 Symbol: TIM_SR_CC1OF
    Definitions
       At line 3474 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 640 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: TIM_SR_CC1OF unused
 TIM_SR_CC2IF 00000004
@@ -63246,13 +63252,13 @@ Symbol: TIM_SR_COMIF
    Uses
       None
 Comment: TIM_SR_COMIF unused
-TIM_SR_TIF 00000040
 
 
 
 ARM Macro Assembler    Page 641 Alphabetic symbol ordering
 Absolute symbols
 
+TIM_SR_TIF 00000040
 
 Symbol: TIM_SR_TIF
    Definitions
@@ -63311,13 +63317,13 @@ Comment: UART4_CR2 unused
 UART4_CR3 40004C14
 
 Symbol: UART4_CR3
-   Definitions
 
 
 
 ARM Macro Assembler    Page 642 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 684 in file ..\src\stm32f10x.s
    Uses
       None
@@ -63376,13 +63382,13 @@ Symbol: UART5_CR2
    Definitions
       At line 689 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 643 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: UART5_CR2 unused
 UART5_CR3 40005014
 
@@ -63444,9 +63450,9 @@ USART1_CR2 40013810
 
 
 
-
 ARM Macro Assembler    Page 644 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USART1_CR2
    Definitions
@@ -63506,13 +63512,13 @@ USART2_BRR 40004408
 
 Symbol: USART2_BRR
    Definitions
-      At line 667 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 645 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 667 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USART2_BRR unused
@@ -63571,13 +63577,13 @@ Symbol: USART3
       At line 173 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USART3 unused
 
 
 
 ARM Macro Assembler    Page 646 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USART3 unused
 USART3_BASE 40004800
 
 Symbol: USART3_BASE
@@ -63636,13 +63642,13 @@ Symbol: USART3_GTPR
 Comment: USART3_GTPR unused
 USART3_SR 40004800
 
-Symbol: USART3_SR
 
 
 
 ARM Macro Assembler    Page 647 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: USART3_SR
    Definitions
       At line 672 in file ..\src\stm32f10x.s
    Uses
@@ -63701,13 +63707,13 @@ USART_CR1_PS 00000200
 Symbol: USART_CR1_PS
    Definitions
       At line 6865 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 648 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: USART_CR1_PS unused
 USART_CR1_RE 00000004
@@ -63766,13 +63772,13 @@ Symbol: USART_CR1_TXEIE
    Uses
       None
 Comment: USART_CR1_TXEIE unused
-USART_CR1_UE 00002000
 
 
 
 ARM Macro Assembler    Page 649 Alphabetic symbol ordering
 Absolute symbols
 
+USART_CR1_UE 00002000
 
 Symbol: USART_CR1_UE
    Definitions
@@ -63831,13 +63837,13 @@ Comment: USART_CR2_LBCL unused
 USART_CR2_LBDIE 00000040
 
 Symbol: USART_CR2_LBDIE
-   Definitions
 
 
 
 ARM Macro Assembler    Page 650 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 6874 in file ..\src\stm32f10x.s
    Uses
       None
@@ -63896,13 +63902,13 @@ Symbol: USART_CR3_CTSIE
    Definitions
       At line 6897 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 651 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: USART_CR3_CTSIE unused
 USART_CR3_DMAR 00000040
 
@@ -63964,9 +63970,9 @@ USART_CR3_RTSE 00000100
 
 
 
-
 ARM Macro Assembler    Page 652 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USART_CR3_RTSE
    Definitions
@@ -64026,13 +64032,13 @@ USART_GTPR_PSC_2 00000004
 
 Symbol: USART_GTPR_PSC_2
    Definitions
-      At line 6903 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 653 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 6903 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USART_GTPR_PSC_2 unused
@@ -64091,13 +64097,13 @@ Symbol: USART_SR_FE
       At line 6838 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USART_SR_FE unused
 
 
 
 ARM Macro Assembler    Page 654 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USART_SR_FE unused
 USART_SR_IDLE 00000010
 
 Symbol: USART_SR_IDLE
@@ -64156,13 +64162,13 @@ Symbol: USART_SR_TC
 Comment: USART_SR_TC unused
 USART_SR_TXE 00000080
 
-Symbol: USART_SR_TXE
 
 
 
 ARM Macro Assembler    Page 655 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: USART_SR_TXE
    Definitions
       At line 6844 in file ..\src\stm32f10x.s
    Uses
@@ -64221,13 +64227,13 @@ USB_ADDR2_TX_ADDR2_TX 0000FFFE
 Symbol: USB_ADDR2_TX_ADDR2_TX
    Definitions
       At line 4991 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 656 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: USB_ADDR2_TX_ADDR2_TX unused
 USB_ADDR3_RX_ADDR3_RX 0000FFFE
@@ -64286,13 +64292,13 @@ Symbol: USB_ADDR6_RX_ADDR6_RX
    Uses
       None
 Comment: USB_ADDR6_RX_ADDR6_RX unused
-USB_ADDR6_TX_ADDR6_TX 0000FFFE
 
 
 
 ARM Macro Assembler    Page 657 Alphabetic symbol ordering
 Absolute symbols
 
+USB_ADDR6_TX_ADDR6_TX 0000FFFE
 
 Symbol: USB_ADDR6_TX_ADDR6_TX
    Definitions
@@ -64351,13 +64357,13 @@ Comment: USB_CNTR_ERRM unused
 USB_CNTR_ESOFM 00000100
 
 Symbol: USB_CNTR_ESOFM
-   Definitions
 
 
 
 ARM Macro Assembler    Page 658 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 4940 in file ..\src\stm32f10x.s
    Uses
       None
@@ -64416,13 +64422,13 @@ Symbol: USB_CNTR_RESUME
    Definitions
       At line 4939 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 659 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: USB_CNTR_RESUME unused
 USB_CNTR_SOFM 00000200
 
@@ -64484,9 +64490,9 @@ USB_COUNT0_RX_0_NUM_BLOCK_0_1 00000800
 
 
 
-
 ARM Macro Assembler    Page 660 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USB_COUNT0_RX_0_NUM_BLOCK_0_1
    Definitions
@@ -64546,13 +64552,13 @@ USB_COUNT0_RX_1_NUM_BLOCK_1_0 04000000
 
 Symbol: USB_COUNT0_RX_1_NUM_BLOCK_1_0
    Definitions
-      At line 5226 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 661 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 5226 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USB_COUNT0_RX_1_NUM_BLOCK_1_0 unused
@@ -64611,13 +64617,13 @@ Symbol: USB_COUNT0_RX_NUM_BLOCK
       At line 5115 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USB_COUNT0_RX_NUM_BLOCK unused
 
 
 
 ARM Macro Assembler    Page 662 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USB_COUNT0_RX_NUM_BLOCK unused
 USB_COUNT0_RX_NUM_BLOCK_0 00000400
 
 Symbol: USB_COUNT0_RX_NUM_BLOCK_0
@@ -64676,13 +64682,13 @@ Symbol: USB_COUNT0_TX_1_COUNT0_TX_1
 Comment: USB_COUNT0_TX_1_COUNT0_TX_1 unused
 USB_COUNT0_TX_COUNT0_TX 000003FF
 
-Symbol: USB_COUNT0_TX_COUNT0_TX
 
 
 
 ARM Macro Assembler    Page 663 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: USB_COUNT0_TX_COUNT0_TX
    Definitions
       At line 5011 in file ..\src\stm32f10x.s
    Uses
@@ -64741,13 +64747,13 @@ USB_COUNT1_RX_0_NUM_BLOCK_0_3 00002000
 Symbol: USB_COUNT1_RX_0_NUM_BLOCK_0_3
    Definitions
       At line 5241 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 664 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: USB_COUNT1_RX_0_NUM_BLOCK_0_3 unused
 USB_COUNT1_RX_0_NUM_BLOCK_0_4 00004000
@@ -64806,13 +64812,13 @@ Symbol: USB_COUNT1_RX_1_NUM_BLOCK_1_2
    Uses
       None
 Comment: USB_COUNT1_RX_1_NUM_BLOCK_1_2 unused
-USB_COUNT1_RX_1_NUM_BLOCK_1_3 20000000
 
 
 
 ARM Macro Assembler    Page 665 Alphabetic symbol ordering
 Absolute symbols
 
+USB_COUNT1_RX_1_NUM_BLOCK_1_3 20000000
 
 Symbol: USB_COUNT1_RX_1_NUM_BLOCK_1_3
    Definitions
@@ -64871,13 +64877,13 @@ Comment: USB_COUNT1_RX_NUM_BLOCK_1 unused
 USB_COUNT1_RX_NUM_BLOCK_2 00001000
 
 Symbol: USB_COUNT1_RX_NUM_BLOCK_2
-   Definitions
 
 
 
 ARM Macro Assembler    Page 666 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 5130 in file ..\src\stm32f10x.s
    Uses
       None
@@ -64936,13 +64942,13 @@ Symbol: USB_COUNT2_RX_0_COUNT2_RX_0
    Definitions
       At line 5259 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 667 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: USB_COUNT2_RX_0_COUNT2_RX_0 unused
 USB_COUNT2_RX_0_NUM_BLOCK_0 00007C00
 
@@ -65004,9 +65010,9 @@ USB_COUNT2_RX_1_COUNT2_RX_1 03FF0000
 
 
 
-
 ARM Macro Assembler    Page 668 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USB_COUNT2_RX_1_COUNT2_RX_1
    Definitions
@@ -65066,13 +65072,13 @@ USB_COUNT2_RX_BLSIZE 00008000
 
 Symbol: USB_COUNT2_RX_BLSIZE
    Definitions
-      At line 5146 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 669 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 5146 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USB_COUNT2_RX_BLSIZE unused
@@ -65131,13 +65137,13 @@ Symbol: USB_COUNT2_RX_NUM_BLOCK_4
       At line 5144 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USB_COUNT2_RX_NUM_BLOCK_4 unused
 
 
 
 ARM Macro Assembler    Page 670 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USB_COUNT2_RX_NUM_BLOCK_4 unused
 USB_COUNT2_TX_0_COUNT2_TX_0 000003FF
 
 Symbol: USB_COUNT2_TX_0_COUNT2_TX_0
@@ -65196,13 +65202,13 @@ Symbol: USB_COUNT3_RX_0_NUM_BLOCK_0_0
 Comment: USB_COUNT3_RX_0_NUM_BLOCK_0_0 unused
 USB_COUNT3_RX_0_NUM_BLOCK_0_1 00000800
 
-Symbol: USB_COUNT3_RX_0_NUM_BLOCK_0_1
 
 
 
 ARM Macro Assembler    Page 671 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: USB_COUNT3_RX_0_NUM_BLOCK_0_1
    Definitions
       At line 5287 in file ..\src\stm32f10x.s
    Uses
@@ -65261,13 +65267,13 @@ USB_COUNT3_RX_1_NUM_BLOCK_1_0 04000000
 Symbol: USB_COUNT3_RX_1_NUM_BLOCK_1_0
    Definitions
       At line 5298 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 672 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: USB_COUNT3_RX_1_NUM_BLOCK_1_0 unused
 USB_COUNT3_RX_1_NUM_BLOCK_1_1 08000000
@@ -65326,13 +65332,13 @@ Symbol: USB_COUNT3_RX_NUM_BLOCK
    Uses
       None
 Comment: USB_COUNT3_RX_NUM_BLOCK unused
-USB_COUNT3_RX_NUM_BLOCK_0 00000400
 
 
 
 ARM Macro Assembler    Page 673 Alphabetic symbol ordering
 Absolute symbols
 
+USB_COUNT3_RX_NUM_BLOCK_0 00000400
 
 Symbol: USB_COUNT3_RX_NUM_BLOCK_0
    Definitions
@@ -65391,13 +65397,13 @@ Comment: USB_COUNT3_TX_1_COUNT3_TX_1 unused
 USB_COUNT3_TX_COUNT3_TX 000003FF
 
 Symbol: USB_COUNT3_TX_COUNT3_TX
-   Definitions
 
 
 
 ARM Macro Assembler    Page 674 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 5020 in file ..\src\stm32f10x.s
    Uses
       None
@@ -65456,13 +65462,13 @@ Symbol: USB_COUNT4_RX_0_NUM_BLOCK_0_3
    Definitions
       At line 5313 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 675 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: USB_COUNT4_RX_0_NUM_BLOCK_0_3 unused
 USB_COUNT4_RX_0_NUM_BLOCK_0_4 00004000
 
@@ -65524,9 +65530,9 @@ USB_COUNT4_RX_1_NUM_BLOCK_1_3 20000000
 
 
 
-
 ARM Macro Assembler    Page 676 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USB_COUNT4_RX_1_NUM_BLOCK_1_3
    Definitions
@@ -65586,13 +65592,13 @@ USB_COUNT4_RX_NUM_BLOCK_2 00001000
 
 Symbol: USB_COUNT4_RX_NUM_BLOCK_2
    Definitions
-      At line 5166 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 677 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 5166 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USB_COUNT4_RX_NUM_BLOCK_2 unused
@@ -65651,13 +65657,13 @@ Symbol: USB_COUNT5_RX_0_COUNT5_RX_0
       At line 5331 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USB_COUNT5_RX_0_COUNT5_RX_0 unused
 
 
 
 ARM Macro Assembler    Page 678 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USB_COUNT5_RX_0_COUNT5_RX_0 unused
 USB_COUNT5_RX_0_NUM_BLOCK_0 00007C00
 
 Symbol: USB_COUNT5_RX_0_NUM_BLOCK_0
@@ -65716,13 +65722,13 @@ Symbol: USB_COUNT5_RX_1_BLSIZE_1
 Comment: USB_COUNT5_RX_1_BLSIZE_1 unused
 USB_COUNT5_RX_1_COUNT5_RX_1 03FF0000
 
-Symbol: USB_COUNT5_RX_1_COUNT5_RX_1
 
 
 
 ARM Macro Assembler    Page 679 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: USB_COUNT5_RX_1_COUNT5_RX_1
    Definitions
       At line 5343 in file ..\src\stm32f10x.s
    Uses
@@ -65781,13 +65787,13 @@ USB_COUNT5_RX_BLSIZE 00008000
 Symbol: USB_COUNT5_RX_BLSIZE
    Definitions
       At line 5182 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 680 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: USB_COUNT5_RX_BLSIZE unused
 USB_COUNT5_RX_COUNT5_RX 000003FF
@@ -65846,13 +65852,13 @@ Symbol: USB_COUNT5_RX_NUM_BLOCK_4
    Uses
       None
 Comment: USB_COUNT5_RX_NUM_BLOCK_4 unused
-USB_COUNT5_TX_0_COUNT5_TX_0 000003FF
 
 
 
 ARM Macro Assembler    Page 681 Alphabetic symbol ordering
 Absolute symbols
 
+USB_COUNT5_TX_0_COUNT5_TX_0 000003FF
 
 Symbol: USB_COUNT5_TX_0_COUNT5_TX_0
    Definitions
@@ -65911,13 +65917,13 @@ Comment: USB_COUNT6_RX_0_NUM_BLOCK_0_0 unused
 USB_COUNT6_RX_0_NUM_BLOCK_0_1 00000800
 
 Symbol: USB_COUNT6_RX_0_NUM_BLOCK_0_1
-   Definitions
 
 
 
 ARM Macro Assembler    Page 682 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 5359 in file ..\src\stm32f10x.s
    Uses
       None
@@ -65976,13 +65982,13 @@ Symbol: USB_COUNT6_RX_1_NUM_BLOCK_1_0
    Definitions
       At line 5370 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 683 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: USB_COUNT6_RX_1_NUM_BLOCK_1_0 unused
 USB_COUNT6_RX_1_NUM_BLOCK_1_1 08000000
 
@@ -66044,9 +66050,9 @@ USB_COUNT6_RX_NUM_BLOCK_0 00000400
 
 
 
-
 ARM Macro Assembler    Page 684 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USB_COUNT6_RX_NUM_BLOCK_0
    Definitions
@@ -66106,13 +66112,13 @@ USB_COUNT6_TX_COUNT6_TX 000003FF
 
 Symbol: USB_COUNT6_TX_COUNT6_TX
    Definitions
-      At line 5029 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 685 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 5029 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USB_COUNT6_TX_COUNT6_TX unused
@@ -66171,13 +66177,13 @@ Symbol: USB_COUNT7_RX_0_NUM_BLOCK_0_3
       At line 5385 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USB_COUNT7_RX_0_NUM_BLOCK_0_3 unused
 
 
 
 ARM Macro Assembler    Page 686 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USB_COUNT7_RX_0_NUM_BLOCK_0_3 unused
 USB_COUNT7_RX_0_NUM_BLOCK_0_4 00004000
 
 Symbol: USB_COUNT7_RX_0_NUM_BLOCK_0_4
@@ -66236,13 +66242,13 @@ Symbol: USB_COUNT7_RX_1_NUM_BLOCK_1_2
 Comment: USB_COUNT7_RX_1_NUM_BLOCK_1_2 unused
 USB_COUNT7_RX_1_NUM_BLOCK_1_3 20000000
 
-Symbol: USB_COUNT7_RX_1_NUM_BLOCK_1_3
 
 
 
 ARM Macro Assembler    Page 687 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: USB_COUNT7_RX_1_NUM_BLOCK_1_3
    Definitions
       At line 5397 in file ..\src\stm32f10x.s
    Uses
@@ -66301,13 +66307,13 @@ USB_COUNT7_RX_NUM_BLOCK_2 00001000
 Symbol: USB_COUNT7_RX_NUM_BLOCK_2
    Definitions
       At line 5202 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 688 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: USB_COUNT7_RX_NUM_BLOCK_2 unused
 USB_COUNT7_RX_NUM_BLOCK_3 00002000
@@ -66366,13 +66372,13 @@ Symbol: USB_DADDR_ADD
    Uses
       None
 Comment: USB_DADDR_ADD unused
-USB_DADDR_ADD0 00000001
 
 
 
 ARM Macro Assembler    Page 689 Alphabetic symbol ordering
 Absolute symbols
 
+USB_DADDR_ADD0 00000001
 
 Symbol: USB_DADDR_ADD0
    Definitions
@@ -66431,13 +66437,13 @@ Comment: USB_DADDR_ADD6 unused
 USB_DADDR_EF 00000080
 
 Symbol: USB_DADDR_EF
-   Definitions
 
 
 
 ARM Macro Assembler    Page 690 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 4978 in file ..\src\stm32f10x.s
    Uses
       None
@@ -66496,13 +66502,13 @@ Symbol: USB_EP0R_EP_KIND
    Definitions
       At line 4750 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 691 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: USB_EP0R_EP_KIND unused
 USB_EP0R_EP_TYPE 00000600
 
@@ -66564,9 +66570,9 @@ USB_EP0R_STAT_TX 00000030
 
 
 
-
 ARM Macro Assembler    Page 692 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USB_EP0R_STAT_TX
    Definitions
@@ -66626,13 +66632,13 @@ USB_EP1R_DTOG_TX 00000040
 
 Symbol: USB_EP1R_DTOG_TX
    Definitions
-      At line 4772 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 693 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 4772 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USB_EP1R_DTOG_TX unused
@@ -66691,13 +66697,13 @@ Symbol: USB_EP1R_STAT_RX
       At line 4782 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USB_EP1R_STAT_RX unused
 
 
 
 ARM Macro Assembler    Page 694 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USB_EP1R_STAT_RX unused
 USB_EP1R_STAT_RX_0 00001000
 
 Symbol: USB_EP1R_STAT_RX_0
@@ -66756,13 +66762,13 @@ Symbol: USB_EP2R_CTR_RX
 Comment: USB_EP2R_CTR_RX unused
 USB_EP2R_CTR_TX 00000080
 
-Symbol: USB_EP2R_CTR_TX
 
 
 
 ARM Macro Assembler    Page 695 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: USB_EP2R_CTR_TX
    Definitions
       At line 4797 in file ..\src\stm32f10x.s
    Uses
@@ -66821,13 +66827,13 @@ USB_EP2R_EP_TYPE_1 00000400
 Symbol: USB_EP2R_EP_TYPE_1
    Definitions
       At line 4802 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 696 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: USB_EP2R_EP_TYPE_1 unused
 USB_EP2R_SETUP 00000800
@@ -66886,13 +66892,13 @@ Symbol: USB_EP2R_STAT_TX_1
    Uses
       None
 Comment: USB_EP2R_STAT_TX_1 unused
-USB_EP3R 40005C0C
 
 
 
 ARM Macro Assembler    Page 697 Alphabetic symbol ordering
 Absolute symbols
 
+USB_EP3R 40005C0C
 
 Symbol: USB_EP3R
    Definitions
@@ -66951,13 +66957,13 @@ Comment: USB_EP3R_EP_KIND unused
 USB_EP3R_EP_TYPE 00000600
 
 Symbol: USB_EP3R_EP_TYPE
-   Definitions
 
 
 
 ARM Macro Assembler    Page 698 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 4824 in file ..\src\stm32f10x.s
    Uses
       None
@@ -67016,13 +67022,13 @@ Symbol: USB_EP3R_STAT_TX
    Definitions
       At line 4816 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 699 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: USB_EP3R_STAT_TX unused
 USB_EP3R_STAT_TX_0 00000010
 
@@ -67084,9 +67090,9 @@ USB_EP4R_EA 0000000F
 
 
 
-
 ARM Macro Assembler    Page 700 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USB_EP4R_EA
    Definitions
@@ -67146,13 +67152,13 @@ USB_EP4R_STAT_RX_0 00001000
 
 Symbol: USB_EP4R_STAT_RX_0
    Definitions
-      At line 4855 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 701 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 4855 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USB_EP4R_STAT_RX_0 unused
@@ -67211,13 +67217,13 @@ Symbol: USB_EP5R_CTR_TX
       At line 4869 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USB_EP5R_CTR_TX unused
 
 
 
 ARM Macro Assembler    Page 702 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USB_EP5R_CTR_TX unused
 USB_EP5R_DTOG_RX 00004000
 
 Symbol: USB_EP5R_DTOG_RX
@@ -67276,13 +67282,13 @@ Symbol: USB_EP5R_EP_TYPE_1
 Comment: USB_EP5R_EP_TYPE_1 unused
 USB_EP5R_SETUP 00000800
 
-Symbol: USB_EP5R_SETUP
 
 
 
 ARM Macro Assembler    Page 703 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: USB_EP5R_SETUP
    Definitions
       At line 4876 in file ..\src\stm32f10x.s
    Uses
@@ -67341,13 +67347,13 @@ USB_EP6R 40005C18
 Symbol: USB_EP6R
    Definitions
       At line 697 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 704 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: USB_EP6R unused
 USB_EP6R_CTR_RX 00008000
@@ -67406,13 +67412,13 @@ Symbol: USB_EP6R_EP_TYPE
    Uses
       None
 Comment: USB_EP6R_EP_TYPE unused
-USB_EP6R_EP_TYPE_0 00000200
 
 
 
 ARM Macro Assembler    Page 705 Alphabetic symbol ordering
 Absolute symbols
 
+USB_EP6R_EP_TYPE_0 00000200
 
 Symbol: USB_EP6R_EP_TYPE_0
    Definitions
@@ -67471,13 +67477,13 @@ Comment: USB_EP6R_STAT_TX unused
 USB_EP6R_STAT_TX_0 00000010
 
 Symbol: USB_EP6R_STAT_TX_0
-   Definitions
 
 
 
 ARM Macro Assembler    Page 706 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 4889 in file ..\src\stm32f10x.s
    Uses
       None
@@ -67536,13 +67542,13 @@ Symbol: USB_EP7R_EA
    Definitions
       At line 4910 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 707 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: USB_EP7R_EA unused
 USB_EP7R_EP_KIND 00000100
 
@@ -67604,9 +67610,9 @@ USB_EP7R_STAT_RX_1 00002000
 
 
 
-
 ARM Macro Assembler    Page 708 Alphabetic symbol ordering
 Absolute symbols
+
 
 Symbol: USB_EP7R_STAT_RX_1
    Definitions
@@ -67666,13 +67672,13 @@ USB_FNR_LSOF 00001800
 
 Symbol: USB_FNR_LSOF
    Definitions
-      At line 4963 in file ..\src\stm32f10x.s
 
 
 
 ARM Macro Assembler    Page 709 Alphabetic symbol ordering
 Absolute symbols
 
+      At line 4963 in file ..\src\stm32f10x.s
    Uses
       None
 Comment: USB_FNR_LSOF unused
@@ -67731,13 +67737,13 @@ Symbol: USB_ISTR_ERR
       At line 4957 in file ..\src\stm32f10x.s
    Uses
       None
-Comment: USB_ISTR_ERR unused
 
 
 
 ARM Macro Assembler    Page 710 Alphabetic symbol ordering
 Absolute symbols
 
+Comment: USB_ISTR_ERR unused
 USB_ISTR_ESOF 00000100
 
 Symbol: USB_ISTR_ESOF
@@ -67796,13 +67802,13 @@ Symbol: VTOR
 Comment: VTOR unused
 WWDG 40002C00
 
-Symbol: WWDG
 
 
 
 ARM Macro Assembler    Page 711 Alphabetic symbol ordering
 Absolute symbols
 
+Symbol: WWDG
    Definitions
       At line 168 in file ..\src\stm32f10x.s
    Uses
@@ -67861,13 +67867,13 @@ WWDG_CFR_W2 00000004
 Symbol: WWDG_CFR_W2
    Definitions
       At line 3758 in file ..\src\stm32f10x.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 712 Alphabetic symbol ordering
 Absolute symbols
 
+   Uses
       None
 Comment: WWDG_CFR_W2 unused
 WWDG_CFR_W3 00000008
@@ -67926,13 +67932,13 @@ Symbol: WWDG_CFR_WDGTB1
    Uses
       None
 Comment: WWDG_CFR_WDGTB1 unused
-WWDG_CR 40002C00
 
 
 
 ARM Macro Assembler    Page 713 Alphabetic symbol ordering
 Absolute symbols
 
+WWDG_CR 40002C00
 
 Symbol: WWDG_CR
    Definitions
@@ -67991,13 +67997,13 @@ Comment: WWDG_CR_T4 unused
 WWDG_CR_T5 00000020
 
 Symbol: WWDG_CR_T5
-   Definitions
 
 
 
 ARM Macro Assembler    Page 714 Alphabetic symbol ordering
 Absolute symbols
 
+   Definitions
       At line 3749 in file ..\src\stm32f10x.s
    Uses
       None
@@ -68056,13 +68062,13 @@ Symbol: __Vendor_SysTickConfig
    Definitions
       At line 9 in file ..\src\stm32f10x.s
    Uses
-      None
 
 
 
 ARM Macro Assembler    Page 715 Alphabetic symbol ordering
 Absolute symbols
 
+      None
 Comment: __Vendor_SysTickConfig unused
 5252 symbols
-5643 symbols in table
+5644 symbols in table
