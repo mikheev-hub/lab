@@ -14,8 +14,8 @@ void EXTI0_IRQHandler(void)
           cnt += 1;
       }
     }
-		GPIOA->ODR = display[3];
-		EXTI->PR |= EXTI_PR_PR0;
+    GPIOA->ODR = display[3];
+    EXTI->PR |= EXTI_PR_PR0;
 }
 
 
@@ -33,8 +33,8 @@ void displayBegin()
                               0x7F,  //8
                               0x6F   //9
                          };
-	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-	GPIOA->CRL   |= 0x33333333;
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+    GPIOA->CRL   |= 0x33333333;
 }
 
 void extiBegin()
