@@ -8,11 +8,11 @@ void EXTI0_IRQHandler(void)
 	  
     if(EXTI->PR & EXTI_PR_PR0)			
     {
-		  for(int i = 0; i<2500; i++){}
-		  if(GPIOC->IDR & GPIO_IDR_IDR0)
-      {
-          cnt += 1;
-      }
+        for(int i = 0; i<2500; i++){}
+		    if(GPIOC->IDR & GPIO_IDR_IDR0)
+        {
+            cnt += 1;
+        }
     }
     GPIOA->ODR = display[3];
     EXTI->PR |= EXTI_PR_PR0;
