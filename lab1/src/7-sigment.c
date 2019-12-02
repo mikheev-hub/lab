@@ -22,16 +22,16 @@ void EXTI0_IRQHandler(void)
 void displayBegin()
 {
     uint16_t display[10]={
-												      0xff,  //0
-													    0x48,  //1
-													    0x3D,  //2
-													    0x6D,  //3
-													    0x4B,  //4
-													    0x67,  //5
-													    0x77,  //6
-													    0x4C,  //7
-													    0x7F,  //8
-													    0x6F   //9
+                              0xff,  //0
+                              0x48,  //1
+                              0x3D,  //2
+                              0x6D,  //3
+                              0x4B,  //4
+                              0x67,  //5
+                              0x77,  //6
+                              0x4C,  //7
+                              0x7F,  //8
+                              0x6F   //9
 											   };
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 	GPIOA->CRL   |= 0x33333333;
@@ -39,8 +39,8 @@ void displayBegin()
 
 void extiBegin()
 {
-	  RCC->APB2ENR |=   (RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN);
-	  GPIOC->CRL   &=~  (GPIO_CRL_CNF0 | GPIO_CRL_MODE0);
+    RCC->APB2ENR |=   (RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN);
+    GPIOC->CRL   &=~  (GPIO_CRL_CNF0 | GPIO_CRL_MODE0);
     GPIOC->CRL   |=   GPIO_CRL_CNF0_1;
 	
     EXTI->FTSR      &=~ EXTI_FTSR_TR0;    // Triggered on falling signal
@@ -66,6 +66,6 @@ int main()
 
 
     while(1)
-		{
-		}
+    {
+    }
 }
