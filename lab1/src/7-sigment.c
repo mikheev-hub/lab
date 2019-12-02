@@ -7,7 +7,7 @@ void EXTI0_IRQHandler(void)
 {
 	  
     if(EXTI->PR & EXTI_PR_PR0)			
-		{
+    {
 		  for(int i = 0; i<2500; i++){}
 		  if(GPIOC->IDR & GPIO_IDR_IDR0)
       {
