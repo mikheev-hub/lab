@@ -26,9 +26,9 @@ void extiBegin()
     EXTI->RTSR      |=  EXTI_RTSR_TR0;
     AFIO->EXTICR[0] |=  AFIO_EXTICR1_EXTI0_PC;
 
-    EXTI->PR        |=  EXTI_PR_PR0;	                             //	flag of interrupt (call of interrupt) 				
-    EXTI->IMR       |=  EXTI_IMR_MR0;		 	                         //  access of interrup of appropriate channel 		
-    EXTI->EMR       |=  EXTI_EMR_MR0;                              //  event on channel 
+    EXTI->PR        |=  EXTI_PR_PR0;	                             // flag of interrupt (call of interrupt) 				
+    EXTI->IMR       |=  EXTI_IMR_MR0;		 	                         // access of interrup of appropriate channel 		
+    EXTI->EMR       |=  EXTI_EMR_MR0;                              // event on channel 
 
     NVIC_EnableIRQ(EXTI0_IRQn);
 }
@@ -56,7 +56,7 @@ void displayWrite(uint8_t cnt)
          Px1
 */  
     
-		uint16_t display[10]={
+    uint16_t display[10]={
                              GPIO_ODR_ODR0 | GPIO_ODR_ODR1 | GPIO_ODR_ODR2 | GPIO_ODR_ODR3 | GPIO_ODR_ODR4 | GPIO_ODR_ODR5,                 //0
                              GPIO_ODR_ODR2 | GPIO_ODR_ODR3,                                                                                 //1
                              GPIO_ODR_ODR4 | GPIO_ODR_ODR3 | GPIO_ODR_ODR6 | GPIO_ODR_ODR0 | GPIO_ODR_ODR1,                                 //2
