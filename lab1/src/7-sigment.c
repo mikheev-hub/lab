@@ -45,7 +45,7 @@ void displayWrite(uint8_t cnt)
     
 /*
          Px4
-			 _______
+       _______
       |       |
   Px5 |  Px6  | Px3
       |_______|		
