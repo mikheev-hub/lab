@@ -84,28 +84,28 @@ int main()
     while(1)
     {
         for(int i = 0; i < 10; i++)
-			  {
+        {
             GPIOB->BSRR |= GPIO_BSRR_BS0;
-					  displayWrite(i);
-					  for(int i = 0; i<3000000; i++);
-					  GPIOB->BSRR |= GPIO_BSRR_BR0;
-					  for(int i = 0; i<30000; i++);
+            displayWrite(i);
+            for(int i = 0; i<3000000; i++);
+            GPIOB->BSRR |= GPIO_BSRR_BR0;
+            for(int i = 0; i<30000; i++);
 
-					 if(i == 9)
-					 {
-						   GPIOB->BSRR |= GPIO_BSRR_BS0;
-               displayWrite(i - 8);
-               for(int i = 0; i<300000; i++);
-               
-               for(int b = 0; b < 9; b++)
-               {
-							     GPIOB->BSRR |= GPIO_BSRR_BS1;
-								   displayWrite(b);
-								   for(int i = 0; i<3000000; i++);
-								   GPIOB->BSRR |= GPIO_BSRR_BR1; 
-							 }						 
-					 }
-				}
+            if(i == 9)
+            {
+	              GPIOB->BSRR |= GPIO_BSRR_BS0;
+	              displayWrite(i - 8);
+	              for(int i = 0; i<300000; i++);
+	 
+	              for(int b = 0; b < 9; b++)
+	              {
+			              GPIOB->BSRR |= GPIO_BSRR_BS1;
+			              displayWrite(b);
+			              for(int i = 0; i<3000000; i++);
+			              GPIOB->BSRR |= GPIO_BSRR_BR1; 
+	              }						 
+             }
+        }
 			
 //			  GPIOB->BSRR |= GPIO_BSRR_BR0;
 //			  GPIOB->BSRR |= GPIO_BSRR_BS1;
