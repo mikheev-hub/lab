@@ -104,7 +104,7 @@ int main()
 			              for(int i = 0; i<3000000; i++);
 			              GPIOB->BSRR |= GPIO_BSRR_BR1; 
 	              }						 
-             }
+            }
         }
 			
 //			  GPIOB->BSRR |= GPIO_BSRR_BR0;
