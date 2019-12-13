@@ -380,9 +380,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>7-sigment.c</FileName>
+              <FileName>lab3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\7-sigment.c</FilePath>
+              <FilePath>..\src\lab3.c</FilePath>
             </File>
           </Files>
         </Group>

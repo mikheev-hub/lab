@@ -20,7 +20,7 @@ void EXTI0_IRQHandler(void)
 
 void extiBegin()
 {
-    RCC->APB2ENR |=   (RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN);
+    RCC->APB2ENR |= (RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN);
 
     EXTI->FTSR      &=~ EXTI_FTSR_TR0;         // Triggered on falling signal
     EXTI->RTSR      |=  EXTI_RTSR_TR0;
@@ -71,46 +71,79 @@ void displayWrite(uint8_t cnt)
     GPIOA->ODR = display[cnt];		
 }
 
+void initTIM6(void)
+{
+	RCC->APB1ENR |= RCC_APB1ENR_TIM6EN;	
+	
+	TIM6->PSC = 24 - 1;				
+	TIM6->ARR = 5000 - 1;					
+	TIM6->DIER |= TIM_DIER_UIE;	           // Interrupt by full count of timer		
+	TIM6->CR1 |= TIM_CR1_CEN;			         // Count enable
+	
+	NVIC_EnableIRQ(TIM6_DAC_IRQn);			
+	NVIC_SetPriority(TIM6_DAC_IRQn, 1);		
+}
+
+uint8_t n_count = 0;
+volatile uint8_t R0 = 0, R1 = 0, R2 = 0;
+
+void TIM6_DAC_IRQHandler (void)
+{
+	  TIM6->SR &= ~TIM_SR_UIF;
+    if(n_count == 0)
+    {
+		    GPIOB->ODR |= GPIO_ODR_ODR0;
+			  GPIOB->ODR &= ~GPIO_ODR_ODR1;
+			  GPIOB->ODR &= ~GPIO_ODR_ODR2;
+			  displayWrite(R0);
+		}
+    else if(n_count == 1)
+    {
+		    GPIOB->ODR |= GPIO_ODR_ODR1;
+			  GPIOB->ODR &= ~GPIO_ODR_ODR0;
+			  GPIOB->ODR &= ~GPIO_ODR_ODR2;
+			  displayWrite(R1);
+		}
+    else if(n_count == 2)
+    {
+		    GPIOB->ODR |= GPIO_ODR_ODR2;
+			  GPIOB->ODR &= ~GPIO_ODR_ODR1;
+			  GPIOB->ODR &= ~GPIO_ODR_ODR0;
+			
+			  displayWrite(R2);
+		}
+
+    n_count++;
+    if(n_count>3)
+        n_count = 0;			
+}
+
+void led(uint8_t x)
+{
+    R0 = x/100;
+	  R1 = (x/10)%10;
+	  R2 = x%10;
+}
 
 int main()
 {
     extiBegin();
     RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
-    GPIOB->CRL    = 0x33; 
+    GPIOB->CRL    = 0x333;
+	  initTIM6();
+	  GPIOB->ODR |= GPIO_ODR_ODR0;
+	  GPIOB->ODR |= GPIO_ODR_ODR1;
+	  GPIOB->ODR |= GPIO_ODR_ODR2;
 	  
-
-
-
     while(1)
     {
-        for(int i = 0; i < 10; i++)
-        {
-            GPIOB->BSRR |= GPIO_BSRR_BS0;
-            displayWrite(i);
-            for(int i = 0; i<3000000; i++);
-            GPIOB->BSRR |= GPIO_BSRR_BR0;
-            for(int i = 0; i<30000; i++);
 
-            if(i == 9)
-            {
-	              GPIOB->BSRR |= GPIO_BSRR_BS0;
-	              displayWrite(i - 8);
-	              for(int i = 0; i<300000; i++);
-	 
-	              for(int b = 0; b < 9; b++)
-	              {
-			              GPIOB->BSRR |= GPIO_BSRR_BS1;
-			              displayWrite(b);
-			              for(int i = 0; i<3000000; i++);
-			              GPIOB->BSRR |= GPIO_BSRR_BR1; 
-	              }						 
-            }
-        }
-			
-//			  GPIOB->BSRR |= GPIO_BSRR_BR0;
-//			  GPIOB->BSRR |= GPIO_BSRR_BS1;
-//        displayWrite(2);
-//			  for(int i = 0; i<10000; i++);
-			  
+		    for( int i = 0; i < 10; i++)
+			  {
+	          led(i);
+					  for(int b = 0; b < 3000000; b++);
+				
+				}
+
     }
 }

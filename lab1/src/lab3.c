@@ -84,7 +84,7 @@ void EXTI0_IRQHandler(void)
 void usartBegin(void)
 {
     uint32_t baudrate = 115200;
-	  uint32_t _BRR = ((SystemCoreClock +  baudrate / 2 ) / baudrate); // вычисляем скорость передачи данных USART
+	  uint32_t speed = ((SystemCoreClock +  baudrate / 2 ) / baudrate); // вычисляем скорость передачи данных USART
 	  
 	  RCC->APB2ENR |= (RCC_APB2ENR_USART1EN | RCC_APB2ENR_AFIOEN);
 	  
@@ -96,7 +96,7 @@ void usartBegin(void)
 	  GPIOA->CRH &= ~(GPIO_CRH_MODE10 | GPIO_CRH_CNF10);
 		GPIOA->CRH |= GPIO_CRH_CNF10_0; /* PA10 RX */
 	
-	  USART1->BRR = _BRR;
+	  USART1->BRR = speed;
 		USART1->CR2 = 0;
 		USART1->CR1 = 0;
 		USART1->CR1 |= USART_CR1_TE;
@@ -149,62 +149,55 @@ void question(char *str)
 	  char answer[50]; 
     if(!strcmp(str, "FREQ?"))
     {
-		    sprintf(answer, "%s_%d%c", "FREQ", cnt, 'K');
-			  usartTransmission(answer);
-			  memset(answer, 0, 50);	  
+		    sprintf(answer, "%s_%d%c", "FREQ", cnt, 'K');	  
 		}
 
-    if(!strcmp(str,"*ITDN?"))
+    else if(!strcmp(str,"*ITDN?"))
     {
 		    strcpy(answer, "Mikheev&Chernov_IU4-73");
-			  usartTransmission(answer);
-			  memset(answer, 0, 50);
 		}
     
-    if(!strcmp(str,"FREQ 1"))		
+    else if(!strcmp(str,"FREQ 1"))		
     {
 			  cnt = 1;
 		    pwm(cnt);
 			  strcpy(answer, "OK");
-			  usartTransmission(answer);
-			  memset(answer, 0, 50);
 		}
 		
-		if(!strcmp(str,"FREQ 2"))		
+		else if(!strcmp(str,"FREQ 2"))		
     {
 		    pwm(2);
 			  cnt = 2;
 			  strcpy(answer, "OK");
-			  usartTransmission(answer);
-			  memset(answer, 0, 50);
 		}
 		
-		if(!strcmp(str,"FREQ 3"))		
+		else if(!strcmp(str,"FREQ 3"))		
     {
 		    pwm(3);
 			  cnt = 3;
 			  strcpy(answer, "OK");
-			  usartTransmission(answer);
-			  memset(answer, 0, 50);
 		}
 
-		if(!strcmp(str,"FREQ 4"))		
+		else if(!strcmp(str,"FREQ 4"))		
     {
 		    pwm(4);
 			  cnt = 4;
 			  strcpy(answer, "OK");
-			  usartTransmission(answer);
-			  memset(answer, 0, 50);
 		}
 		
-		if(!strcmp(str,"FREQ 5"))		
+		else if(!strcmp(str,"FREQ 5"))		
     {
 		    pwm(5);
 			  cnt = 5;
 			  strcpy(answer, "OK");
-			  usartTransmission(answer);
-			  memset(answer, 0, 50);
 		}
+		else
+    {
+		    strcpy(answer, "Error");
+		}			
+		
+		    usartTransmission(answer);
+			  memset(answer, 0, 50);
 
 } 
 
