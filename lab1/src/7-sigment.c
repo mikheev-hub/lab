@@ -1,5 +1,5 @@
 #include "stm32f10x.h"
-
+jhgjhgjhjgjh
 
 uint16_t display[10];
 uint8_t  led1 = 2;
@@ -9,26 +9,26 @@ uint8_t  led3 = 2;
 void displayWrite(uint8_t cnt)
 {
     if(cnt > 10)
-    { 
+    {
         GPIOC->ODR = 0x0;
-        return;	
+        return;
     }
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
-    GPIOC->CRL    = 0x33333333;  
-    
+    GPIOC->CRL    = 0x33333333;
+
 /*
          Px4
        _______
       |       |
   Px5 |  Px6  | Px3
-      |_______|		
+      |_______|
       |       |
   Px0 |       | Px2
       |_______|
 
          Px1
-*/  
-    
+*/
+
     uint16_t display[10]={
                              GPIO_ODR_ODR0 | GPIO_ODR_ODR1 | GPIO_ODR_ODR2 | GPIO_ODR_ODR3 | GPIO_ODR_ODR4 | GPIO_ODR_ODR5,                 //0
                              GPIO_ODR_ODR2 | GPIO_ODR_ODR3,                                                                                 //1
@@ -41,7 +41,7 @@ void displayWrite(uint8_t cnt)
                              GPIO_ODR_ODR4 | GPIO_ODR_ODR5 | GPIO_ODR_ODR3 | GPIO_ODR_ODR6 | GPIO_ODR_ODR2 | GPIO_ODR_ODR1 | GPIO_ODR_ODR0, //8
                              GPIO_ODR_ODR4 | GPIO_ODR_ODR3 | GPIO_ODR_ODR5 | GPIO_ODR_ODR6 | GPIO_ODR_ODR2 | GPIO_ODR_ODR1                  //9
                          };
-    GPIOC->ODR = display[cnt];		
+    GPIOC->ODR = display[cnt];
 }
 
 void adcBegin(void)
@@ -75,7 +75,7 @@ uint16_t startConvADC (void)
 }
 uint16_t convertVoltage()
 {
-    voltage = (value * 3.3)/4096;    
+    voltage = (value * 3.3)/4096;
 }
 
 
@@ -88,7 +88,7 @@ int main()
 	  float volatile voltage = 0;
 	  uint16_t volatile round;
 	  double volatile temp;
-	  
+
     while(1)
     {
 			  value = startConvADC();
@@ -98,7 +98,7 @@ int main()
         led1 = round/100;
 	      led2 = (round % 100)/10;
 			  led3 = round % 10;
-			  
+
 			  GPIOB->BSRR = GPIO_BSRR_BR2;
 			  GPIOB->BSRR = GPIO_BSRR_BR1;
 			  GPIOB->BSRR = GPIO_BSRR_BS0;
@@ -107,11 +107,11 @@ int main()
 			  GPIOB->BSRR = GPIO_BSRR_BR0;
         GPIOB->BSRR = GPIO_BSRR_BS1;
 			  displayWrite(led2);
-        for(int i = 0; i < 3000; i++);	
+        for(int i = 0; i < 3000; i++);
 			  GPIOB->BSRR = GPIO_BSRR_BR1;
 		    GPIOB->BSRR = GPIO_BSRR_BS2;
 			  displayWrite(led3);
-        for(int i = 0; i < 3000; i++);			
+        for(int i = 0; i < 3000; i++);
     }
-		
+
 }
