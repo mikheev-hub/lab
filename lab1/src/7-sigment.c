@@ -1,5 +1,4 @@
 #include "stm32f10x.h"
-jhgjhgjhjgjh
 
 uint16_t display[10];
 uint8_t  led1 = 2;
@@ -73,44 +72,51 @@ uint16_t startConvADC (void)
 	while (!(ADC1->SR & ADC_SR_EOC));
 	return (ADC1->DR);
 }
-uint16_t convertVoltage()
+/*
+    Функция перевода из цифрового
+    в аналоговое напряжение
+*/
+double convertVoltage(uint16_t digitalVoltage)
 {
-    voltage = (value * 3.3)/4096;
+    float referenceVoltage = 3.3;
+    uint16_t bitRateADC    = 4095;
+    return (digitalVoltage * referenceVoltage) / bitRateADC;
 }
+
 
 
 int main()
 {
-	  adcBegin();
+    adcBegin();
     RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
     GPIOB->CRL    = 0x333;
-    uint16_t volatile value = 0;
-	  float volatile voltage = 0;
-	  uint16_t volatile round;
-	  double volatile temp;
+    uint16_t volatile value   = 0;
+    float    volatile voltage = 0;
+    uint16_t volatile round;
+    double   volatile temp;
 
     while(1)
     {
-			  value = startConvADC();
+        value = startConvADC();
 
-			  temp = (voltage - 0.826) / 0.0315;
-			  round = temp;
+        temp = (voltage - 0.826) / 0.0315;
+        round = temp;
         led1 = round/100;
-	      led2 = (round % 100)/10;
-			  led3 = round % 10;
+        led2 = (round % 100)/10;
+        led3 = round % 10;
 
-			  GPIOB->BSRR = GPIO_BSRR_BR2;
-			  GPIOB->BSRR = GPIO_BSRR_BR1;
-			  GPIOB->BSRR = GPIO_BSRR_BS0;
-			  displayWrite(led1);
+        GPIOB->BSRR = GPIO_BSRR_BR2;
+        GPIOB->BSRR = GPIO_BSRR_BR1;
+        GPIOB->BSRR = GPIO_BSRR_BS0;
+        displayWrite(led1);
         for(int i = 0; i < 3000; i++);
-			  GPIOB->BSRR = GPIO_BSRR_BR0;
+        GPIOB->BSRR = GPIO_BSRR_BR0;
         GPIOB->BSRR = GPIO_BSRR_BS1;
-			  displayWrite(led2);
+        displayWrite(led2);
         for(int i = 0; i < 3000; i++);
-			  GPIOB->BSRR = GPIO_BSRR_BR1;
-		    GPIOB->BSRR = GPIO_BSRR_BS2;
-			  displayWrite(led3);
+        GPIOB->BSRR = GPIO_BSRR_BR1;
+        GPIOB->BSRR = GPIO_BSRR_BS2;
+        displayWrite(led3);
         for(int i = 0; i < 3000; i++);
     }
 
