@@ -11,7 +11,7 @@ bool tab = true;
 
 void TIM6_DAC_IRQHandler (void)
 {
-	TIM6->SR &= ~TIM_SR_UIF;			
+	TIM6->SR &= ~TIM_SR_UIF;	
 	GPIOC->ODR ^= GPIO_ODR_ODR8;
 }
 

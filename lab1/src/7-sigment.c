@@ -1,47 +1,20 @@
 #include "stm32f10x.h"
-uint16_t cnt = 0;
+
+
 uint16_t display[10];
-
-
-void EXTI0_IRQHandler(void)
-{
-    if(EXTI->PR & EXTI_PR_PR0)			
-    {
-        for(int i = 0; i<2500; i++){}
-        if(GPIOC->IDR & GPIO_IDR_IDR0)
-        {
-	          for(int i = 0; i < 10000; i++);
-	          cnt += 1;
-	          cnt %= 10;
-        }
-     }
-    EXTI->PR |= EXTI_PR_PR0;
-}
-
-void extiBegin()
-{
-    RCC->APB2ENR |= (RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN);
-
-    EXTI->FTSR      &=~ EXTI_FTSR_TR0;         // Triggered on falling signal
-    EXTI->RTSR      |=  EXTI_RTSR_TR0;
-    AFIO->EXTICR[0] |=  AFIO_EXTICR1_EXTI0_PC;
-	
-    EXTI->PR        |=  EXTI_PR_PR0;           // flag of interrupt (call of interrupt)
-    EXTI->IMR       |=  EXTI_IMR_MR0;		 	     // access of interrup of appropriate channel
-    EXTI->EMR       |=  EXTI_EMR_MR0;          // event on channel
-
-    NVIC_EnableIRQ(EXTI0_IRQn);
-}
+uint8_t  led1 = 2;
+uint8_t  led2 = 3;
+uint8_t  led3 = 2;
 
 void displayWrite(uint8_t cnt)
 {
     if(cnt > 10)
     { 
-        GPIOA->ODR = 0x0;
+        GPIOC->ODR = 0x0;
         return;	
     }
-    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-    GPIOA->CRL    = 0x33333333;  
+    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
+    GPIOC->CRL    = 0x33333333;  
     
 /*
          Px4
@@ -68,82 +41,77 @@ void displayWrite(uint8_t cnt)
                              GPIO_ODR_ODR4 | GPIO_ODR_ODR5 | GPIO_ODR_ODR3 | GPIO_ODR_ODR6 | GPIO_ODR_ODR2 | GPIO_ODR_ODR1 | GPIO_ODR_ODR0, //8
                              GPIO_ODR_ODR4 | GPIO_ODR_ODR3 | GPIO_ODR_ODR5 | GPIO_ODR_ODR6 | GPIO_ODR_ODR2 | GPIO_ODR_ODR1                  //9
                          };
-    GPIOA->ODR = display[cnt];		
+    GPIOC->ODR = display[cnt];		
 }
 
-void initTIM6(void)
+void adcBegin(void)
 {
-	RCC->APB1ENR |= RCC_APB1ENR_TIM6EN;	
-	
-	TIM6->PSC = 24 - 1;				
-	TIM6->ARR = 5000 - 1;					
-	TIM6->DIER |= TIM_DIER_UIE;	           // Interrupt by full count of timer		
-	TIM6->CR1 |= TIM_CR1_CEN;			         // Count enable
-	
-	NVIC_EnableIRQ(TIM6_DAC_IRQn);			
-	NVIC_SetPriority(TIM6_DAC_IRQn, 1);		
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
+
+	GPIOA->CRL &= ~GPIO_CRL_CNF0;
+	GPIOA->CRL &= ~GPIO_CRL_MODE0;
+
+	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
+	RCC->APB2ENR |= RCC_CFGR_ADCPRE_DIV2;
+
+	ADC1->CR2 |= ADC_CR2_CAL; // start calibration
+
+	while (!(ADC1->CR2 & ADC_CR2_CAL)); // waiting end calibration
+
+	ADC1->CR2 |= ADC_CR2_ADON; // enable ADC
+	ADC1->CR2 &= ~ADC_CR2_CONT; // 0 - single conversion, 1 - continuous conversion
+	ADC1->CR2 |= ADC_CR2_EXTSEL; // event start conversion SWSTART
+	ADC1->CR2 |= ADC_CR2_EXTTRIG; // enable start conversion external signal
+	ADC1->SMPR1 |= ADC_SMPR1_SMP16; // sempling 239.5 cycle
+	ADC1->SQR3 &= ~ADC_SQR3_SQ1; // selection channel
 }
 
-uint8_t n_count = 0;
-volatile uint8_t R0 = 0, R1 = 0, R2 = 0;
-
-void TIM6_DAC_IRQHandler (void)
+uint16_t startConvADC (void)
 {
-	  TIM6->SR &= ~TIM_SR_UIF;
-    if(n_count == 0)
-    {
-		    GPIOB->ODR |= GPIO_ODR_ODR0;
-			  GPIOB->ODR &= ~GPIO_ODR_ODR1;
-			  GPIOB->ODR &= ~GPIO_ODR_ODR2;
-			  displayWrite(R0);
-		}
-    else if(n_count == 1)
-    {
-		    GPIOB->ODR |= GPIO_ODR_ODR1;
-			  GPIOB->ODR &= ~GPIO_ODR_ODR0;
-			  GPIOB->ODR &= ~GPIO_ODR_ODR2;
-			  displayWrite(R1);
-		}
-    else if(n_count == 2)
-    {
-		    GPIOB->ODR |= GPIO_ODR_ODR2;
-			  GPIOB->ODR &= ~GPIO_ODR_ODR1;
-			  GPIOB->ODR &= ~GPIO_ODR_ODR0;
-			
-			  displayWrite(R2);
-		}
-
-    n_count++;
-    if(n_count>3)
-        n_count = 0;			
+	ADC1->CR2 |= ADC_CR2_SWSTART;
+	while (!(ADC1->SR & ADC_SR_EOC));
+	return (ADC1->DR);
 }
-
-void led(uint8_t x)
+uint16_t convertVoltage()
 {
-    R0 = x/100;
-	  R1 = (x/10)%10;
-	  R2 = x%10;
+    voltage = (value * 3.3)/4096;    
 }
+
 
 int main()
 {
-    extiBegin();
+	  adcBegin();
     RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
     GPIOB->CRL    = 0x333;
-	  initTIM6();
-	  GPIOB->ODR |= GPIO_ODR_ODR0;
-	  GPIOB->ODR |= GPIO_ODR_ODR1;
-	  GPIOB->ODR |= GPIO_ODR_ODR2;
+    uint16_t volatile value = 0;
+	  float volatile voltage = 0;
+	  uint16_t volatile round;
+	  double volatile temp;
 	  
     while(1)
     {
+			  value = startConvADC();
 
-		    for( int i = 0; i < 10; i++)
-			  {
-	          led(i);
-					  for(int b = 0; b < 3000000; b++);
-				
-				}
-
+			  temp = (voltage - 0.826) / 0.0315;
+			  round = temp;
+        led1 = round/100;
+	      led2 = (round % 100)/10;
+			  led3 = round % 10;
+			  
+			  GPIOB->BSRR = GPIO_BSRR_BR2;
+			  GPIOB->BSRR = GPIO_BSRR_BR1;
+			  GPIOB->BSRR = GPIO_BSRR_BS0;
+			  displayWrite(led1);
+        for(int i = 0; i < 3000; i++);
+			  GPIOB->BSRR = GPIO_BSRR_BR0;
+        GPIOB->BSRR = GPIO_BSRR_BS1;
+			  displayWrite(led2);
+        for(int i = 0; i < 3000; i++);	
+			  GPIOB->BSRR = GPIO_BSRR_BR1;
+		    GPIOB->BSRR = GPIO_BSRR_BS2;
+			  displayWrite(led3);
+        for(int i = 0; i < 3000; i++);			
     }
+		
 }
