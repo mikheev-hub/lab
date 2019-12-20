@@ -82,7 +82,13 @@ double convertVoltage(uint16_t digitalVoltage)
     uint16_t bitRateADC    = 4095;
     return (digitalVoltage * referenceVoltage) / bitRateADC;
 }
-
+/*
+    Функция перевода напряжения в значение влажности
+*/
+uint16_t convertHumidity(double convertVoltage)
+{
+    return ((convertVoltage - 0.826) / 0.0315) * 1.5;
+}
 
 
 int main()
@@ -97,9 +103,8 @@ int main()
 
     while(1)
     {
-        value = startConvADC();
-
-        temp = (voltage - 0.826) / 0.0315;
+        voltage = convertVoltage(startConvADC());
+        humidity = convertHumidity(voltage);
         round = temp;
         led1 = round/100;
         led2 = (round % 100)/10;
